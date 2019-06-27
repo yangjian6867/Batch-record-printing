@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"登录";
-    
+    self.title = @"aaaa";
 }
 
 - (IBAction)loginAction:(id)sender {
