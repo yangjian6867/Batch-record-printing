@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="AccountTF" destination="tKS-cA-oOV" id="fgw-os-4GQ"/>
+                <outlet property="passwordTF" destination="Q14-Ix-UHh" id="d1S-Q1-36O"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xnm-EG-fcS">
+                    <rect key="frame" x="157" y="94" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="QGT-ak-oSt"/>
+                        <constraint firstAttribute="height" constant="100" id="rCN-mQ-aF2"/>
+                    </constraints>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="nmg1" borderStyle="bezel" placeholder="请输入用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tKS-cA-oOV">
+                    <rect key="frame" x="30" y="284" width="354" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="rs2-41-KU8"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Abc123456" borderStyle="bezel" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q14-Ix-UHh">
+                    <rect key="frame" x="30" y="349" width="354" height="50"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf4-vP-MJR">
+                    <rect key="frame" x="30" y="419" width="354" height="50"/>
+                    <color key="backgroundColor" red="1" green="0.55238807130000001" blue="0.3574762333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="登录"/>
+                    <connections>
+                        <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="s9L-8m-heN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="xnm-EG-fcS" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="50" id="5oF-e1-ECp"/>
+                <constraint firstItem="Q14-Ix-UHh" firstAttribute="leading" secondItem="tKS-cA-oOV" secondAttribute="leading" id="8ty-Jd-dH6"/>
+                <constraint firstItem="tKS-cA-oOV" firstAttribute="top" secondItem="xnm-EG-fcS" secondAttribute="bottom" constant="90" id="AbE-o3-hzQ"/>
+                <constraint firstItem="tKS-cA-oOV" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="30" id="IZc-aJ-5Dl"/>
+                <constraint firstItem="xnm-EG-fcS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Oc2-lo-o06"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="tKS-cA-oOV" secondAttribute="trailing" constant="30" id="W1I-EM-z3b"/>
+                <constraint firstItem="kf4-vP-MJR" firstAttribute="leading" secondItem="Q14-Ix-UHh" secondAttribute="leading" id="cxb-aq-jGQ"/>
+                <constraint firstItem="kf4-vP-MJR" firstAttribute="height" secondItem="Q14-Ix-UHh" secondAttribute="height" id="eJi-bM-ZWU"/>
+                <constraint firstItem="kf4-vP-MJR" firstAttribute="trailing" secondItem="Q14-Ix-UHh" secondAttribute="trailing" id="mXY-5C-vPf"/>
+                <constraint firstItem="Q14-Ix-UHh" firstAttribute="trailing" secondItem="tKS-cA-oOV" secondAttribute="trailing" id="roh-98-V5H"/>
+                <constraint firstItem="Q14-Ix-UHh" firstAttribute="height" secondItem="tKS-cA-oOV" secondAttribute="height" id="s4F-la-qWj"/>
+                <constraint firstItem="Q14-Ix-UHh" firstAttribute="top" secondItem="tKS-cA-oOV" secondAttribute="bottom" constant="15" id="wT2-HP-jWF"/>
+                <constraint firstItem="kf4-vP-MJR" firstAttribute="top" secondItem="Q14-Ix-UHh" secondAttribute="bottom" constant="20" id="zVB-bu-fRh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="-41" y="90"/>
+        </view>
+    </objects>
+</document>

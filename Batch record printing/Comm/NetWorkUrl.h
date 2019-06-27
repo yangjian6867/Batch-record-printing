@@ -1,0 +1,26 @@
+//
+//  NetWorkUrl.h
+//  Batch record printing
+//
+//  Created by 杨健 on 2019/6/18.
+//  Copyright © 2019 杨健. All rights reserved.
+//
+
+#ifndef NetWorkUrl_h
+#define NetWorkUrl_h
+
+#define MaiURL  @"http://218.89.222.117:9007"  // 回家测试：
+
+//登陆
+#define  LoginUrl @"/sofn-tts-web-branch/ttsLogin/loginApp"
+
+//获取 UUID
+#define  UUIDUrl @"/sofn-tts-web-branch/ttsLogin/getUUID"
+
+// 图片url前缀
+#define kImagePre @"/sofn-sys-web/sysTemplate/downPic?fileUrl="
+
+// 获取基地列表
+#define BaseListUrl  @"/sofn-tts-web-branch/ttsScltxxcjBase/getPageInfo"
+
+#endif /* NetWorkUrl_h */
