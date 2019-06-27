@@ -1063,7 +1063,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4V5KFRWL87;
-				GCC_PREFIX_HEADER = "/Users/sg/Downloads/Batch record printing/Batch record printing/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/yangjian/Documents/Batch record printing/Batch record printing/PrefixHeader.pch";
 				INFOPLIST_FILE = "Batch record printing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1086,7 +1086,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4V5KFRWL87;
-				GCC_PREFIX_HEADER = "/Users/sg/Downloads/Batch record printing/Batch record printing/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/yangjian/Documents/Batch record printing/Batch record printing/PrefixHeader.pch";
 				INFOPLIST_FILE = "Batch record printing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
