@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy)NSString *behavior;
 @property (nonatomic,strong)NSArray *popvalues;
 @property (nonatomic,copy)NSString *nextValue;
+@property (nonatomic,assign)CGFloat height;
 @end
 
 

@@ -85,5 +85,15 @@
         "behavior":"photos",
         "height":130.0,
         "accessory":false
+    },
+    {
+        "icon":"icon_video",
+        "name":"上传视频",
+        "detail":"AddMedia",
+        "type":"collectionView",
+        "key":"image",
+        "behavior":"photos",
+        "height":130.0,
+        "accessory":false
     }
 ]

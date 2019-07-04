@@ -9,5 +9,5 @@
 #ifndef FXTools_h
 #define FXTools_h
 #import "NetWorkTools.h"
-
+#import "TZImagePickerController.h"
 #endif /* FXTools_h */

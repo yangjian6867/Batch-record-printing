@@ -25,6 +25,8 @@
 #import "FXCategories.h"
 #import "FXTools.h"
 
+#import "NetWorkApisYJ.h"
+
 #define ColorRGB(r,g,b)    [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 #define MAINCOLOR ColorRGB(41.0f, 179.0f, 107.0f)

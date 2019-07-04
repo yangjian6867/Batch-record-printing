@@ -10,6 +10,7 @@
 #import "FXJIDiViewModel.h"
 #import "FXJIDIModel.h"
 #import "FXJIDITableViewCell.h"
+#import "FXJiDiInfoViewController.h"
 @interface FXJIDITableViewController ()
 @property (nonatomic,strong)NSMutableArray *jidiListArr;
 @property (nonatomic,assign)FXJIDIModel *preJiModel;
@@ -31,7 +32,7 @@ static NSString *const FXJIDITableViewCellID = @"FXJIDITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"基地详情";
+    self.title = @"选择基地";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureAction)];
     
@@ -62,9 +63,16 @@ static NSString *const FXJIDITableViewCellID = @"FXJIDITableViewCell";
 
         [tableView reloadRowsAtIndexPaths:reloaIndexPaths withRowAnimation:UITableViewRowAnimationNone];
         self.preJiModel = model;
-        
     };
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    FXJiDiInfoViewController *jidiinfoVC = [[FXJiDiInfoViewController alloc]init];
+    jidiinfoVC.selectedJiDi = self.jidiListArr[indexPath.row];
+    [self.navigationController pushViewController:jidiinfoVC animated:YES];
 }
 
 //根据一个j基地模型返回indexpath;

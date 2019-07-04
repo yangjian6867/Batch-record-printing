@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeTableViewController.h"
+#import "AddBatchViewController.h"
 #import "LoginViewController.h"
 @interface AppDelegate ()
 
@@ -23,7 +23,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     if ([FXUserTool sharedFXUserTool].account) {
-        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[[HomeTableViewController alloc]init]];;
+        
+        UITabBarController *tabrVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateInitialViewController];
+        
+        self.window.rootViewController = tabrVC;
     }else{
         self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[[LoginViewController alloc]init]];;
     }

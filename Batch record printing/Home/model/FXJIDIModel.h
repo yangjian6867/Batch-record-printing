@@ -35,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *UPDATE_TIME; //
 @property (nonatomic, copy) NSString *USER_IDCODE; //
 @property (nonatomic, copy) NSString *DICT_NAME;
+
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *detail;
+
 @property (nonatomic,assign)BOOL selected;
 @end
 

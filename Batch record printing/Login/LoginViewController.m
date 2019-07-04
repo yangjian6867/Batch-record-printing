@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "Account.h"
 #import "FXUserTool.h"
-#import "HomeTableViewController.h"
+#import "AddBatchViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *AccountTF;
@@ -55,7 +55,7 @@
         Account *account = [Account mj_objectWithKeyValues:JSON[@"data"]];
         account.token = JSON[@"token"];
         [[FXUserTool sharedFXUserTool]saveAccount:account];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[HomeTableViewController alloc]init]];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[AddBatchViewController alloc]init]];
         [UIApplication changeRootVC:nav];
     } :^(NSError *error) {
         

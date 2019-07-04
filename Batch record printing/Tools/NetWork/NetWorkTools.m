@@ -33,7 +33,7 @@ single_implementation(NetWorkTools)
     
     
     NSString *requestUrl = [MaiURL stringByAppendingString:urlStr];
-    
+    NSLog(@"requestUrl = %@ parms = %@",requestUrl,parms);
     [SVProgressHUD show];
     void(^sccessBlock)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
             [SVProgressHUD dismiss];
