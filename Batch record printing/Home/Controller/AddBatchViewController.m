@@ -14,9 +14,12 @@
 #import "FXJIDITableViewController.h"
 #import "FXZSBatchPictureCell.h"
 #import "FXZSBatchRemarkCell.h"
+#import "ZSProduct.h"
+#import "ZSProductUnit.h"
 
 @interface AddBatchViewController ()<UIDocumentPickerDelegate,UIDocumentInteractionControllerDelegate,KXPickerViewDelegate,KXDatePickerViewDelegate>
 @property (nonatomic,strong)NSArray *productes;
+@property (nonatomic,strong)NSArray *productUnits;
 @end
 
 @implementation AddBatchViewController
@@ -72,6 +75,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"FXZSBatchViewCell" bundle:nil] forCellReuseIdentifier:FXZSBatchViewCellID];
     [self.tableView registerNib:[UINib nibWithNibName:@"FXZSBatchPictureCell" bundle:nil] forCellReuseIdentifier:FXZSBatchPictureCellID];
     [self.tableView registerNib:[UINib nibWithNibName:@"FXZSBatchRemarkCell" bundle:nil] forCellReuseIdentifier:FXZSBatchRemarkCellID];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
 }
 
 
@@ -111,14 +116,20 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.view endEditing:YES];
     self.selectedBatch = self.datas[indexPath.row];
-    self.selectedRow = indexPath.row;
+    self.selectedIndexPath = indexPath;
     NSString *behavior = self.selectedBatch.behavior;
     if ([behavior isEqualToString:@"pop"]) {
-        if (indexPath.row == 1) {
+         if (indexPath.row == 0){
+            [self requestProduct];
+         }else if (indexPath.row == 1) {
             [kWindown addSubview:self.coverView];
             [kWindown addSubview:self.datePickView];
+        }else if (indexPath.row == 3){
+            [self requestUnit];
         }else{
+            self.pickView.dataArray = self.selectedBatch.popvalues;
             [self showPickView];
         }
     }else if ([behavior isEqualToString:@"next"]){
@@ -126,6 +137,7 @@
             FXJIDITableViewController *jidiVC = [[FXJIDITableViewController alloc]init];;
             jidiVC.callBackBlock = ^(FXJIDIModel * _Nonnull model) {
                 [self.uploadDict setValue:model.ID forKey:@"harvestBaseid"];
+                [self.uploadDict setValue:model.name forKey:@"harvestBasename"];
                 self.selectedBatch.detail = model.NAME;
                 [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             };
@@ -134,29 +146,72 @@
     }
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
 
 #pragma mark -- 弹出选择框
 -(void)showPickView{
-    self.pickView.dataArray = self.selectedBatch.popvalues;
     [kWindown addSubview:self.coverView];
     [kWindown addSubview:self.pickView];
+}
+
+#pragma mark -- 请求产品种类
+-(void)requestProduct{
+    [[NetWorkTools sharedNetWorkTools]requestWithType:RequesTypePOST urlString:getProductByTerm parms:@{@"industry":@"01",@"start":@"1",@"length":@"10",@"entity_id":[FXUserTool sharedFXUserTool].account.userId} success:^(id JSON) {
+        
+        self.productes = [ZSProduct mj_objectArrayWithKeyValuesArray:JSON[@"data"][@"list"]];
+        self.selectedBatch.popvalues = self.productes;
+        self.pickView.dataArray = [self.productes valueForKeyPath:@"NAME"];;
+        [self showPickView];
+        
+    } :^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark -- 请求单位
+-(void)requestUnit{
+  
+    [[NetWorkTools sharedNetWorkTools]requestWithType:RequesTypePOST urlString:getUnits parms:@{@"id":@"33a6dbab71c04079a8a41d5e725d2b3d100ec0d3dbc44f67963ffb54014fb607"} success:^(id JSON) {
+        
+        self.productUnits = [ZSProductUnit mj_objectArrayWithKeyValuesArray:JSON];
+        self.selectedBatch.popvalues = self.productUnits;
+        self.pickView.dataArray = [self.productUnits valueForKeyPath:@"dictName"];;
+        [self showPickView];
+        
+    } :^(NSError *error) {
+        
+    }];
 }
 
 
 - (void)kxPickerViewDidSelectedPickerViewRow:(NSInteger)selectedRow{
     [self removeCoverView];
-    self.selectedBatch.detail = self.selectedBatch.popvalues[selectedRow];
-    [self refreshDataWithRow:self.selectedRow];
+    self.selectedBatch.detail = self.pickView.dataArray[selectedRow];
+    
+    if ([self.selectedBatch.name isEqualToString:@"产品名称"]) {
+        ZSProduct *product = self.selectedBatch.popvalues[selectedRow];
+        self.uploadDict[@"productSort"] = product.TYPE_NAME;
+        self.uploadDict[@"productId"] = product.PRODUCT_CODE;
+    }else if ([self.selectedBatch.name isEqualToString:@"单位"]){
+        ZSProductUnit *unit = self.selectedBatch.popvalues[selectedRow];
+        self.selectedBatch.detailID = unit.ID;
+    }
+    
+    
+    [self refreshDataWithRow:self.selectedIndexPath];
 }
 
 -(void)kxDatePickerdidSelectedPickerViewRow:(NSString *)selectedDateString{
     [self removeCoverView];
     self.selectedBatch.detail = selectedDateString;
-    [self refreshDataWithRow:1];
+    self.uploadDict[@"harvestTime"] = selectedDateString;
+    [self refreshDataWithRow:[NSIndexPath indexPathForRow:1 inSection:0]];
 }
 
--(void)refreshDataWithRow:(NSInteger)row{
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+-(void)refreshDataWithRow:(NSIndexPath *)indexPath{
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(void)kxPickerViewCancelPickerViewRow{
@@ -171,6 +226,34 @@
     [self.coverView removeFromSuperview];
     [self.datePickView removeFromSuperview];
     [self.pickView removeFromSuperview];
+}
+
+
+-(void)save{
+    
+    Account *count = [FXUserTool sharedFXUserTool].account;
+    
+    
+    for (ZSBatch *batch in self.datas) {
+        if (!batch.detail) {
+            NSString *popMessage = [NSString stringWithFormat:@"请%@%@",[batch.type isEqualToString:@"textLabel"] ? @"选择":@"输入",batch.name];
+            [SVProgressHUD showErrorWithStatus:popMessage];
+            return;
+        }
+    }
+    
+    for (ZSBatch *batch in self.datas) {
+        [self.uploadDict setValue:batch.detailID ? batch.detailID : batch.detail forKey:batch.key];
+    }
+    
+    //补充字段
+    self.uploadDict[@"joinFlag"] = @"1";
+     self.uploadDict[@"productIndustry"] = @"01";
+    self.uploadDict[@"tempEnId"] = count.userId;
+    NSLog(@"self.uploadDict = %@",self.uploadDict);
+    
+    
+    
 }
 
 @end

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0630D29722CEF0F90006E1E2 /* JIDI.json in Resources */ = {isa = PBXBuildFile; fileRef = 0630D29622CEF0F90006E1E2 /* JIDI.json */; };
+		0630D29A22CF3F9C0006E1E2 /* ZSProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630D29922CF3F9C0006E1E2 /* ZSProduct.m */; };
+		0630D29D22CF44830006E1E2 /* ZSProductUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630D29C22CF44830006E1E2 /* ZSProductUnit.m */; };
+		0630D2A522CF5F0B0006E1E2 /* SGPictureAndVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630D2A422CF5F0B0006E1E2 /* SGPictureAndVideoController.m */; };
+		0630D2A922CF5F210006E1E2 /* SGPictureAndVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630D2A622CF5F210006E1E2 /* SGPictureAndVideoCell.m */; };
+		0630D2AA22CF5F210006E1E2 /* SGPictureAndVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0630D2A822CF5F210006E1E2 /* SGPictureAndVideoCell.xib */; };
+		0630D2AD22CF5F480006E1E2 /* SGImageAndVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0630D2AB22CF5F470006E1E2 /* SGImageAndVideoModel.m */; };
 		0648F6CA22C37A640076C9A7 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0648F6C922C37A640076C9A7 /* NullSafe.m */; };
 		065848AE22C217FE00D27ADE /* FXJIDITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065848AD22C217FE00D27ADE /* FXJIDITableViewController.m */; };
 		065848B522C2185200D27ADE /* FXJIDIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 065848B422C2185200D27ADE /* FXJIDIModel.m */; };
@@ -45,8 +52,6 @@
 		C71F426A22C205D600333804 /* UIApplication+Addtion.m in Sources */ = {isa = PBXBuildFile; fileRef = C71F426922C205D600333804 /* UIApplication+Addtion.m */; };
 		C71F426D22C2081000333804 /* UINavigationController+Addtion.m in Sources */ = {isa = PBXBuildFile; fileRef = C71F426C22C2081000333804 /* UINavigationController+Addtion.m */; };
 		C721AC4622C076390024AA80 /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = C721AC4522C076390024AA80 /* NSMutableArray+Safe.m */; };
-		C73ACA4222B258E700D76AD9 /* ZSBatchViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C73ACA3F22B258E600D76AD9 /* ZSBatchViewCell.m */; };
-		C73ACA4322B258E700D76AD9 /* ZSBatchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C73ACA4122B258E700D76AD9 /* ZSBatchViewCell.xib */; };
 		C797835222B249CA00A8C252 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C797835022B249CA00A8C252 /* Main.storyboard */; };
 		C797835422B249CE00A8C252 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C797835322B249CE00A8C252 /* Assets.xcassets */; };
 		C797835722B249CE00A8C252 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C797835522B249CE00A8C252 /* LaunchScreen.storyboard */; };
@@ -115,6 +120,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0630D29622CEF0F90006E1E2 /* JIDI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JIDI.json; sourceTree = "<group>"; };
+		0630D29822CF3F9C0006E1E2 /* ZSProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSProduct.h; sourceTree = "<group>"; };
+		0630D29922CF3F9C0006E1E2 /* ZSProduct.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSProduct.m; sourceTree = "<group>"; };
+		0630D29B22CF44830006E1E2 /* ZSProductUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZSProductUnit.h; sourceTree = "<group>"; };
+		0630D29C22CF44830006E1E2 /* ZSProductUnit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZSProductUnit.m; sourceTree = "<group>"; };
+		0630D2A322CF5F0A0006E1E2 /* SGPictureAndVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPictureAndVideoController.h; sourceTree = "<group>"; };
+		0630D2A422CF5F0B0006E1E2 /* SGPictureAndVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPictureAndVideoController.m; sourceTree = "<group>"; };
+		0630D2A622CF5F210006E1E2 /* SGPictureAndVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPictureAndVideoCell.m; sourceTree = "<group>"; };
+		0630D2A722CF5F210006E1E2 /* SGPictureAndVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPictureAndVideoCell.h; sourceTree = "<group>"; };
+		0630D2A822CF5F210006E1E2 /* SGPictureAndVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGPictureAndVideoCell.xib; sourceTree = "<group>"; };
+		0630D2AB22CF5F470006E1E2 /* SGImageAndVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageAndVideoModel.m; sourceTree = "<group>"; };
+		0630D2AC22CF5F480006E1E2 /* SGImageAndVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageAndVideoModel.h; sourceTree = "<group>"; };
 		0648F6C922C37A640076C9A7 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		065848AC22C217FE00D27ADE /* FXJIDITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXJIDITableViewController.h; sourceTree = "<group>"; };
 		065848AD22C217FE00D27ADE /* FXJIDITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXJIDITableViewController.m; sourceTree = "<group>"; };
@@ -190,9 +207,6 @@
 		C71F426C22C2081000333804 /* UINavigationController+Addtion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Addtion.m"; sourceTree = "<group>"; };
 		C721AC4422C076390024AA80 /* NSMutableArray+Safe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Safe.h"; sourceTree = "<group>"; };
 		C721AC4522C076390024AA80 /* NSMutableArray+Safe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Safe.m"; sourceTree = "<group>"; };
-		C73ACA3F22B258E600D76AD9 /* ZSBatchViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSBatchViewCell.m; sourceTree = "<group>"; };
-		C73ACA4022B258E700D76AD9 /* ZSBatchViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSBatchViewCell.h; sourceTree = "<group>"; };
-		C73ACA4122B258E700D76AD9 /* ZSBatchViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZSBatchViewCell.xib; sourceTree = "<group>"; };
 		C797834722B249CA00A8C252 /* Batch record printing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Batch record printing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C797835122B249CA00A8C252 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C797835322B249CE00A8C252 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -564,6 +578,7 @@
 		C797836C22B24B4E00A8C252 /* File */ = {
 			isa = PBXGroup;
 			children = (
+				0630D29622CEF0F90006E1E2 /* JIDI.json */,
 				C797836D22B24B4E00A8C252 /* PlantHarvest.json */,
 			);
 			path = File;
@@ -592,6 +607,8 @@
 		C797837222B24B4E00A8C252 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0630D2A322CF5F0A0006E1E2 /* SGPictureAndVideoController.h */,
+				0630D2A422CF5F0B0006E1E2 /* SGPictureAndVideoController.m */,
 				C7E3698322CE451000413782 /* AddBatchViewController.h */,
 				C7E3698222CE451000413782 /* AddBatchViewController.m */,
 				C7E3698022CE451000413782 /* FXJiDiInfoViewController.h */,
@@ -617,6 +634,12 @@
 				C716279322B34AF000BAF024 /* iCloudManager.m */,
 				065848B322C2185200D27ADE /* FXJIDIModel.h */,
 				065848B422C2185200D27ADE /* FXJIDIModel.m */,
+				0630D29822CF3F9C0006E1E2 /* ZSProduct.h */,
+				0630D29922CF3F9C0006E1E2 /* ZSProduct.m */,
+				0630D29B22CF44830006E1E2 /* ZSProductUnit.h */,
+				0630D29C22CF44830006E1E2 /* ZSProductUnit.m */,
+				0630D2AC22CF5F480006E1E2 /* SGImageAndVideoModel.h */,
+				0630D2AB22CF5F470006E1E2 /* SGImageAndVideoModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -624,14 +647,14 @@
 		C797837622B24B4E00A8C252 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0630D2A722CF5F210006E1E2 /* SGPictureAndVideoCell.h */,
+				0630D2A622CF5F210006E1E2 /* SGPictureAndVideoCell.m */,
+				0630D2A822CF5F210006E1E2 /* SGPictureAndVideoCell.xib */,
 				C7E3698D22CE452500413782 /* PictureCell */,
 				C7E3698822CE452500413782 /* remarkCell */,
 				C7E3698722CE452500413782 /* FXZSBatchViewCell.h */,
 				C7E3698C22CE452500413782 /* FXZSBatchViewCell.m */,
 				C7E3699622CE452500413782 /* FXZSBatchViewCell.xib */,
-				C73ACA4022B258E700D76AD9 /* ZSBatchViewCell.h */,
-				C73ACA3F22B258E600D76AD9 /* ZSBatchViewCell.m */,
-				C73ACA4122B258E700D76AD9 /* ZSBatchViewCell.xib */,
 				065848BA22C22BA200D27ADE /* FXJIDITableViewCell.h */,
 				065848BB22C22BA200D27ADE /* FXJIDITableViewCell.m */,
 				065848BC22C22BA200D27ADE /* FXJIDITableViewCell.xib */,
@@ -947,15 +970,16 @@
 			files = (
 				C797835722B249CE00A8C252 /* LaunchScreen.storyboard in Resources */,
 				C7E3699D22CE452500413782 /* SGFarmActivitiyPictureItemCell.xib in Resources */,
-				C73ACA4322B258E700D76AD9 /* ZSBatchViewCell.xib in Resources */,
 				C7FF390422B894AD00C54492 /* LoginViewController.xib in Resources */,
 				C797837822B24B4E00A8C252 /* PlantHarvest.json in Resources */,
 				065848BE22C22BA200D27ADE /* FXJIDITableViewCell.xib in Resources */,
 				C7E3699F22CE452500413782 /* FXZSBatchViewCell.xib in Resources */,
+				0630D2AA22CF5F210006E1E2 /* SGPictureAndVideoCell.xib in Resources */,
 				C797835422B249CE00A8C252 /* Assets.xcassets in Resources */,
 				C797835222B249CA00A8C252 /* Main.storyboard in Resources */,
 				C7E3699B22CE452500413782 /* FXZSBatchPictureItemCell.xib in Resources */,
 				C7E3699C22CE452500413782 /* FXZSBatchPictureCell.xib in Resources */,
+				0630D29722CEF0F90006E1E2 /* JIDI.json in Resources */,
 				C7E3699822CE452500413782 /* FXZSBatchRemarkCell.xib in Resources */,
 				C7E369C522CE454100413782 /* TZImagePickerController.bundle in Resources */,
 			);
@@ -1020,11 +1044,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7E369CB22CE454100413782 /* TZLocationManager.m in Sources */,
-				C73ACA4222B258E700D76AD9 /* ZSBatchViewCell.m in Sources */,
 				C7E3699922CE452500413782 /* FXZSBatchViewCell.m in Sources */,
 				C70EB0CB22BCE43200F4DE52 /* PDFView.m in Sources */,
 				C7E369C822CE454100413782 /* TZPhotoPickerController.m in Sources */,
 				C7E369C422CE454100413782 /* TZPhotoPreviewController.m in Sources */,
+				0630D2A922CF5F210006E1E2 /* SGPictureAndVideoCell.m in Sources */,
 				C71F425E22C2046A00333804 /* UIView+Addition.m in Sources */,
 				C7E3698522CE451000413782 /* MeTableViewController.m in Sources */,
 				C797837A22B24B4E00A8C252 /* HomeTableViewController.m in Sources */,
@@ -1048,6 +1072,7 @@
 				C71F424922C2038800333804 /* UINavigationItem+NHAddition.m in Sources */,
 				C7E3698622CE451000413782 /* AddBatchViewController.m in Sources */,
 				C7EA410822BB7A76008D0E11 /* NSString+URL.m in Sources */,
+				0630D2AD22CF5F480006E1E2 /* SGImageAndVideoModel.m in Sources */,
 				C71F425722C2038800333804 /* SGVertButton.m in Sources */,
 				C7EA410C22BB7A76008D0E11 /* NSString+Size.m in Sources */,
 				C70EB0CE22BCE43200F4DE52 /* UIImage+PDF.m in Sources */,
@@ -1058,6 +1083,8 @@
 				065848B522C2185200D27ADE /* FXJIDIModel.m in Sources */,
 				C7EA410722BB7A76008D0E11 /* NSFileManager+Paths.m in Sources */,
 				C7EA410E22BB7A76008D0E11 /* NSArray+Addition.m in Sources */,
+				0630D29A22CF3F9C0006E1E2 /* ZSProduct.m in Sources */,
+				0630D29D22CF44830006E1E2 /* ZSProductUnit.m in Sources */,
 				C71F425022C2038800333804 /* UIImage+Addition.m in Sources */,
 				C7EA411422BB7A76008D0E11 /* NSObject+Runtime.m in Sources */,
 				C71F426D22C2081000333804 /* UINavigationController+Addtion.m in Sources */,
@@ -1078,6 +1105,7 @@
 				065848BD22C22BA200D27ADE /* FXJIDITableViewCell.m in Sources */,
 				C7FF38FD22B893EA00C54492 /* FXUserTool.m in Sources */,
 				C71F425622C2038800333804 /* UIViewController+Addition.m in Sources */,
+				0630D2A522CF5F0B0006E1E2 /* SGPictureAndVideoController.m in Sources */,
 				C7EA411522BB7A76008D0E11 /* NSDate+Addition.m in Sources */,
 				C7EA410A22BB7A76008D0E11 /* NSString+Extension.m in Sources */,
 				C71F425522C2038800333804 /* UIViewController+Loading.m in Sources */,
@@ -1255,7 +1283,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4V5KFRWL87;
-				GCC_PREFIX_HEADER = "/Users/yangjian/Documents/Batch record printing/Batch record printing/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$SRCROOT/Batch record printing/PrefixHeader.pch";
 				INFOPLIST_FILE = "Batch record printing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1278,7 +1306,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4V5KFRWL87;
-				GCC_PREFIX_HEADER = "/Users/yangjian/Documents/Batch record printing/Batch record printing/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$SRCROOT/Batch record printing/PrefixHeader.pch";
 				INFOPLIST_FILE = "Batch record printing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

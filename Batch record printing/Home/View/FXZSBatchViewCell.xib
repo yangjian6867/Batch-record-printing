@@ -20,9 +20,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ShP-Ye-NVc">
-                        <rect key="frame" x="15" y="0.0" width="150" height="49.5"/>
+                        <rect key="frame" x="15" y="0.0" width="120" height="49.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="c0U-4l-EsH"/>
+                            <constraint firstAttribute="width" constant="120" id="c0U-4l-EsH"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -31,42 +31,55 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择作物名称" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsY-AR-SSo">
-                        <rect key="frame" x="165" y="16" width="155" height="18"/>
+                        <rect key="frame" x="135" y="16" width="160" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hCy-3k-021">
-                        <rect key="frame" x="190" y="2" width="100" height="45.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="Iy4-xx-Lz3"/>
-                        </constraints>
+                        <rect key="frame" x="135" y="2" width="160" height="45.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="XhC-XH-Tj8">
+                        <rect key="frame" x="295" y="12.5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="s9J-u6-7W2"/>
+                            <constraint firstAttribute="width" constant="25" id="vcc-Y3-ndv"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ShP-Ye-NVc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="5kx-gv-ZXf"/>
+                    <constraint firstAttribute="trailing" secondItem="hCy-3k-021" secondAttribute="trailing" constant="25" id="EV0-ia-2Do"/>
                     <constraint firstItem="hCy-3k-021" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="GDj-ze-na1"/>
-                    <constraint firstAttribute="trailing" secondItem="fsY-AR-SSo" secondAttribute="trailing" id="JwX-VX-1us"/>
+                    <constraint firstItem="XhC-XH-Tj8" firstAttribute="leading" secondItem="fsY-AR-SSo" secondAttribute="trailing" id="HjP-4A-dHO"/>
                     <constraint firstItem="ShP-Ye-NVc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LiF-Hk-zd9"/>
                     <constraint firstAttribute="bottom" secondItem="ShP-Ye-NVc" secondAttribute="bottom" id="cz5-2Y-Si4"/>
-                    <constraint firstAttribute="trailing" secondItem="hCy-3k-021" secondAttribute="trailing" constant="30" id="gLf-jl-YCZ"/>
+                    <constraint firstAttribute="trailing" secondItem="XhC-XH-Tj8" secondAttribute="trailing" id="fqr-Py-7zl"/>
                     <constraint firstItem="fsY-AR-SSo" firstAttribute="leading" secondItem="ShP-Ye-NVc" secondAttribute="trailing" id="hox-ZT-B17"/>
+                    <constraint firstItem="hCy-3k-021" firstAttribute="leading" secondItem="ShP-Ye-NVc" secondAttribute="trailing" id="iSo-v2-Wyx"/>
                     <constraint firstItem="fsY-AR-SSo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nam-ng-BDU"/>
                     <constraint firstAttribute="bottom" secondItem="hCy-3k-021" secondAttribute="bottom" constant="2" id="pfR-W5-Vv9"/>
                     <constraint firstItem="ShP-Ye-NVc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uln-od-wC1"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="XhC-XH-Tj8" firstAttribute="centerY" secondItem="aW0-zy-SZf" secondAttribute="centerY" id="siy-lF-Cs3"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="arrowView" destination="XhC-XH-Tj8" id="hGO-WZ-eKc"/>
+                <outlet property="arrowWidthCons" destination="vcc-Y3-ndv" id="X18-1N-AsV"/>
                 <outlet property="detailLabel" destination="fsY-AR-SSo" id="OK1-fJ-slb"/>
-                <outlet property="rightMarginCons" destination="JwX-VX-1us" id="a8P-KZ-7Gt"/>
                 <outlet property="textFieldView" destination="hCy-3k-021" id="dHf-RW-28w"/>
                 <outlet property="titleButton" destination="ShP-Ye-NVc" id="Vfh-0P-Bwx"/>
             </connections>
             <point key="canvasLocation" x="-1371.2" y="37.781109445277366"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="arrow_right" width="24" height="24"/>
+    </resources>
 </document>

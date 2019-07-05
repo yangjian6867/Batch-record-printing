@@ -55,8 +55,9 @@
         Account *account = [Account mj_objectWithKeyValues:JSON[@"data"]];
         account.token = JSON[@"token"];
         [[FXUserTool sharedFXUserTool]saveAccount:account];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[AddBatchViewController alloc]init]];
-        [UIApplication changeRootVC:nav];
+        UITabBarController *tabrVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateInitialViewController];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabrVC;
     } :^(NSError *error) {
         
     }];

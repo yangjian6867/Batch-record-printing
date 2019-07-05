@@ -2,76 +2,46 @@
     {
         "icon":"icon_zhutiname",
         "name":"基地名称",
-        "detail":"选择产品名称",
-        "type":"textLabel",
-        "accessory":false
+        "type":"textLabel"
     },
     {
         "icon":"iocn_quyu",
         "name":"所属区域",
-        "detail":"选择收获时间",
-        "type":"textLabel",
-        "accessory":false
-    },
-    {
-        "icon":"icon_diqu",
-        "name":"经纬度",
-        "detail":"输入收获数量",
-        "type":"textLabel",
-        "accessory":false
+        "type":"textLabel"
     },
     {
         "icon":"icon-jingweidu",
         "name":"基地地址",
-        "detail":"选择单位",
-        "type":"textLabel",
-        "accessory":true
+        "type":"textField"
     },
     {
         "icon":"icon_pingfang",
-        "name":"基地主要产品",
-        "detail":"选择产品来源",
-        "type":"textLabel",
-        "key":"harvestDate",
-        "accessory":true
-    },
-    {
-        "icon":"icon_name",
         "name":"基地面积",
-        "detail":"选择收获基地",
         "type":"textLabel",
-        "key":"brandName",
-        "accessory":true
+        "key":"brandName"
     },
     {
         "icon":"icon_zhuangtai",
         "name":"基地负责人",
-        "detail":"选择质检情况",
-        "type":"textLabel",
-        "key":"brandName",
-        "accessory":true
+        "type":"textField",
+        "key":"brandName"
     },
     {
         "icon":"icon_phone",
         "name":"联系方式",
-        "detail":"选择质检结论",
-        "type":"textLabel",
-        "key":"brandName",
-        "accessory":true
+        "type":"textField",
+        "key":"brandName"
     },
     {
         "icon":"icon_zhuangtai",
         "name":"基地状态",
-        "detail":"选择质检结论",
-        "type":"textLabel",
-        "accessory":true
+        "type":"textLabel"
     },
     {
         "icon":"icon_image",
         "name":"基地图片",
         "detail":"AddMedia",
         "type":"collectionView",
-        "height":130.0,
-        "accessory":false
+        "height":130.0
     }
 ]

@@ -9,6 +9,7 @@
 #import "FXZSBatchPictureCell.h"
 #import "FXZSBatchPictureItemCell.h"
 #import "TZImagePickerController.h"
+#import "SGPictureAndVideoController.h"
 
 #define kAddImage [UIImage imageNamed:@"AddMedia"]
 
@@ -18,25 +19,23 @@
 @property (weak, nonatomic) IBOutlet UIButton *topButton;
 
 @property (nonatomic,strong)NSIndexPath *selectedIndexPath;
-@property (nonatomic,strong)NSMutableArray *images;
+@property (nonatomic,strong)NSMutableArray *imageUrls;
 @end
 
 @implementation FXZSBatchPictureCell
 
 static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
 
--(NSMutableArray *)images{
-    if (_images == nil) {
-        _images = [NSMutableArray array];
+-(NSMutableArray *)imageUrls{
+    if (_imageUrls == nil) {
+        _imageUrls = [NSMutableArray array];
     }
-    return _images;
+    return _imageUrls;
 }
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self.images addObject:kAddImage];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"FXZSBatchPictureItemCell" bundle:nil] forCellWithReuseIdentifier:FXZSBatchPictureItemCellID];
+    [self.collectionView registerNib:[UINib nibWithNibName:FXZSBatchPictureItemCellID bundle:nil] forCellWithReuseIdentifier:FXZSBatchPictureItemCellID];
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.itemSize = CGSizeMake(70, 70);
 }
@@ -44,23 +43,31 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     FXZSBatchPictureItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FXZSBatchPictureItemCellID forIndexPath:indexPath];
-    cell.image = self.images[indexPath.row];
+    cell.imageUrl = self.imageUrls[indexPath.row];
     cell.delegate = self;
     return cell;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.images.count;
+    return self.imageUrls.count;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    UIImage *image =  self.images[indexPath.row];
-    if ([UIImagePNGRepresentation(image) isEqualToData:UIImagePNGRepresentation(kAddImage)]) {
-        TZImagePickerController *imagePicker = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
-        [kWindown.rootViewController presentViewController:imagePicker animated:YES completion:nil];
-        self.selectedIndexPath = indexPath;
-    }
+    SGPictureAndVideoController *videoVC = [[SGPictureAndVideoController alloc]init];
+    
+    [self.rootVC.navigationController pushViewController:videoVC animated:YES];
+    
+//
+//
+//    FXZSBatchPictureItemCell *cell = (FXZSBatchPictureItemCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    UIImage *image =  cell.iconView.image;
+//    if ([UIImagePNGRepresentation(image) isEqualToData:UIImagePNGRepresentation(kAddImage)]) {
+//        TZImagePickerController *imagePicker = [[TZImagePickerController alloc]initWithMaxImagesCount:1 delegate:self];
+//        [kWindown.rootViewController presentViewController:imagePicker animated:YES completion:nil];
+//        self.selectedIndexPath = indexPath;
+//    }
+    
 }
 
 #pragma mark -- TZImagePickerController代理方法
@@ -97,6 +104,11 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
     _batch = batch;
     [self.topButton setTitle:batch.name forState:UIControlStateNormal];
     [self.topButton setImage:[UIImage imageNamed:batch.icon] forState:UIControlStateNormal];
+    
+    if (!self.imageUrls.count) {
+        [self.imageUrls addObject:batch.detail];
+    }
+    
     [self.collectionView reloadData];
 }
 

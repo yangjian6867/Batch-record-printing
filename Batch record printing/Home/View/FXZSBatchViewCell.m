@@ -10,22 +10,18 @@
 @interface FXZSBatchViewCell ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *titleButton;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightMarginCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowWidthCons;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowView;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldView;
-
 @end
 
 @implementation FXZSBatchViewCell
 
-
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.accessoryView.contentMode = UIViewContentModeRight;
     self.textFieldView.delegate = self;
-
-
     [self.textFieldView addTarget:self action:@selector(textField1TextChange:) forControlEvents:UIControlEventEditingChanged];
-
 }
 
 
@@ -63,13 +59,19 @@
     if ([type isEqualToString:@"textLabel"]) {
         self.textFieldView.hidden = YES;
         self.detailLabel.hidden = NO;
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        self.detailLabel.text = batch.detail ? batch.detail : [NSString stringWithFormat:@"请选择%@",batch.name];
+        self.detailLabel.textColor = batch.detail ? [UIColor blackColor] : [UIColor lightGrayColor];
+        self.arrowView.hidden = batch.showInfo;
     }else{
         self.textFieldView.hidden = NO;
-        self.textFieldView.placeholder = batch.detail;
         self.detailLabel.hidden = YES;
-        self.accessoryType = UITableViewCellAccessoryNone;
+        self.arrowWidthCons.constant = 0;
+        self.textFieldView.placeholder = [NSString stringWithFormat:@"请输入%@",batch.name];
+        self.textFieldView.text = batch.detail ? batch.detail : nil;
+        self.textFieldView.userInteractionEnabled = !batch.detail;
     }
+    
+    
 }
 
 

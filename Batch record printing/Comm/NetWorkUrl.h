@@ -23,4 +23,10 @@
 // 获取基地列表
 #define BaseListUrl  @"/sofn-tts-web-branch/ttsScltxxcjBase/getPageInfo"
 
+#define getProductByTerm @"/sofn-tts-web-branch/ttsScltxxcjScgl/getProductByTerm"
+
+#define getUnits @"/sofn-tts-web-branch/ttsScltxxcjScgl/getUnits"
+
+#define getMediaPageInfo @"/sofn-tts-web-branch/ttsScltxxcjMedia/getMediaPageInfo"
+
 #endif /* NetWorkUrl_h */

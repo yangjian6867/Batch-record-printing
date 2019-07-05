@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSMutableArray *datas;
 @property (nonatomic, strong)ZSBatch *selectedBatch;
 @property (nonatomic,assign)BOOL haveFile;
-@property (nonatomic,assign)NSUInteger selectedRow;
+@property (nonatomic,strong)NSIndexPath *selectedIndexPath;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FXZSBatchPictureCell : UITableViewCell
 @property (nonatomic,assign)id<SGFarmActivitiyPictureCellDelegate> delegate;
 @property (nonatomic,strong)ZSBatch *batch;
+@property (nonatomic,strong)UIViewController *rootVC
 @end
 
 NS_ASSUME_NONNULL_END

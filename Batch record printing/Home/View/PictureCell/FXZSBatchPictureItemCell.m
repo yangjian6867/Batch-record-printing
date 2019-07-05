@@ -10,8 +10,7 @@
 
 @interface FXZSBatchPictureItemCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *iconView;
-@property (weak, nonatomic) IBOutlet UIButton *deletedBtn;
+
 
 @end
 
@@ -24,15 +23,12 @@
 
 -(void)setImageUrl:(NSString *)imageUrl{
     _imageUrl = imageUrl;
-   
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"AddMedia"]];
-    
-}
-
-
--(void)setImage:(UIImage *)image{
-    _image = image;
-    self.iconView.image = image;
+    if ([imageUrl isEqualToString:@"AddMedia"]) {
+        self.iconView.image = [UIImage imageNamed:@"AddMedia"];
+    }else{
+         NSString *dwonLoadUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,kImagePre,imageUrl];
+        [self.iconView sd_setImageWithURL:[NSURL URLWithString:dwonLoadUrl] placeholderImage:[UIImage imageNamed:@"AddMedia"]];
+    }
 }
 
 - (IBAction)deletedAciton:(UIButton *)sender {

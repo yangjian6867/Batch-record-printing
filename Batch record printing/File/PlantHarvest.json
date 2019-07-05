@@ -2,7 +2,6 @@
     {
         "icon":"icon_zhutiname",
         "name":"产品名称",
-        "detail":"选择产品名称",
         "type":"textLabel",
         "key":"productName",
         "behavior":"pop",
@@ -12,7 +11,6 @@
     {
         "icon":"icon_time",
         "name":"收获时间",
-        "detail":"选择收获时间",
         "type":"textLabel",
         "key":"harvestTime",
         "behavior":"pop",
@@ -21,17 +19,15 @@
     {
         "icon":"icon_shuliang",
         "name":"收获数量",
-        "detail":"输入收获数量",
         "type":"textField",
-        "key":"harvestAmount",
+        "key":"productAmount",
         "accessory":false
     },
     {
         "icon":"icon_danwei",
         "name":"单位",
-        "detail":"选择单位",
         "type":"textLabel",
-        "key":"unit",
+        "key":"unitId",
         "behavior":"pop",
         "popvalues":["克","千克","吨","斤"],
         "accessory":true
@@ -39,9 +35,8 @@
     {
         "icon":"icon_time",
         "name":"产品来源",
-        "detail":"选择产品来源",
         "type":"textLabel",
-        "key":"harvestDate",
+        "key":"productSource",
         "behavior":"pop",
         "popvalues":["自产","收购"],
         "accessory":true
@@ -49,9 +44,8 @@
     {
         "icon":"icon_diqu",
         "name":"收获基地",
-        "detail":"选择收获基地",
         "type":"textLabel",
-        "key":"brandName",
+        "key":"harvestBasename",
         "behavior":"next",
         "nextValue":"FXJIDITableViewController",
         "accessory":true
@@ -59,9 +53,8 @@
     {
         "icon":"icon_zhuangtai",
         "name":"质检情况",
-        "detail":"选择质检情况",
         "type":"textLabel",
-        "key":"brandName",
+        "key":"mediCheck",
         "behavior":"pop",
         "popvalues":["自检","委托检测","抽检"],
         "accessory":true
@@ -69,9 +62,8 @@
     {
         "icon":"icon_renwu",
         "name":"质检结论",
-        "detail":"选择质检结论",
         "type":"textLabel",
-        "key":"brandName",
+        "key":"mediResult",
         "behavior":"pop",
         "popvalues":["合格","不合格"],
         "accessory":true

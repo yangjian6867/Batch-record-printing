@@ -11,15 +11,16 @@
 
 @protocol sgFarmActivitiyPictureItemCellDelegate <NSObject>
 
--(void)sgFarmActivitiyPictureItemCellDelted:(FXZSBatchPictureItemCell *)itemCell;
+-(void)sgFarmActivitiyPictureItemCellDelted:(FXZSBatchPictureItemCell *_Nullable)itemCell;
 
 @end
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FXZSBatchPictureItemCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+@property (weak, nonatomic) IBOutlet UIButton *deletedBtn;
 @property (nonatomic,copy)NSString *imageUrl;
-@property (nonatomic,copy)UIImage *image;
 @property (nonatomic,assign)id<sgFarmActivitiyPictureItemCellDelegate> delegate;
 @end
 
