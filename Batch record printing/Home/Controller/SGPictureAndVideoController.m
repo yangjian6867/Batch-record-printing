@@ -7,13 +7,13 @@
 //
 
 #import "SGPictureAndVideoController.h"
-#import "SGImageAndVideoModel.h"
+
 #import "SGPictureAndVideoCell.h"
 
 #define kPictureVideoitemW (UIScreen.screen_width - 30)/2
 
-@interface SGPictureAndVideoController ()
-
+@interface SGPictureAndVideoController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,assign)NSUInteger pageNum;
 @end
 
@@ -32,32 +32,77 @@ static NSString *const SGPictureAndVideoCellID = @"SGPictureAndVideoCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.pageNum = 1;
-    
-    self.view.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"SGPictureAndVideoCell" bundle:nil] forCellWithReuseIdentifier:SGPictureAndVideoCellID];
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+   
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     layout.itemSize = CGSizeMake(kPictureVideoitemW, kPictureVideoitemW);
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadDataFromHttp];
-    }];
+    
+    self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SGPictureAndVideoCell" bundle:nil] forCellWithReuseIdentifier:SGPictureAndVideoCellID];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewItems)];
 
-    [self.collectionView.mj_header beginRefreshing];
+    [self.view addSubview:self.collectionView];
+     [self loadNewItems];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(saveAction)];
 }
 
+-(void)saveAction{
+    
+    NSMutableArray *selectedArr = [NSMutableArray array];
+    for (SGImageAndVideoModel *model in self.imageAndVideos) {
+        if (model.isSelected) {
+            [selectedArr addObject: [model.resourceType containsString:@"video"] ? model.fileImage :  model.resourceUrl];
+        }
+    }
+    
+    if (self.type == 0) {
+        if (selectedArr.count>3) {
+            [SVProgressHUD showErrorWithStatus:@"最多选择3张照片"];
+            return;
+        }
+    }else {
+        if (selectedArr.count>1) {
+            [SVProgressHUD showErrorWithStatus:@"最多选择1部视频"];
+            return;
+        }
+    }
+    
+    
+    
+    self.refreshDataBlock(selectedArr);
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
-- (void)loadDataFromHttp{
+- (void)loadNewItems{
 
     Account *account = [FXUserTool sharedFXUserTool].account;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:account.userId forKey:@"userId"];
     [dict setValue:@"1" forKey:@"pageNum"];
     [dict setValue:@"10" forKey:@"pageSize"];
-    
+    [self.imageAndVideos removeAllObjects];
     [[NetWorkTools sharedNetWorkTools]requestWithType:RequesTypePOST urlString:getMediaPageInfo parms:dict success:^(id JSON) {
-        self.imageAndVideos = [SGImageAndVideoModel mj_objectArrayWithKeyValuesArray:JSON[@"data"][@"list"]];
+        NSArray *arr = [SGImageAndVideoModel mj_objectArrayWithKeyValuesArray:JSON[@"data"][@"list"]];
+        
+        for (SGImageAndVideoModel *model in arr) {
+            if (self.type == 0) {
+                if ([model.resourceType isEqualToString:@"image"]) {
+                    [self.imageAndVideos addObject:model];
+                }
+            }else{
+                if ([model.resourceType isEqualToString:@"video"]) {
+                    [self.imageAndVideos addObject:model];
+                }
+            }
+        }
+        
         [self.collectionView reloadData];
         [self.collectionView.mj_header endRefreshing];
     } :^(NSError *error) {
@@ -69,6 +114,9 @@ static NSString *const SGPictureAndVideoCellID = @"SGPictureAndVideoCell";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     SGPictureAndVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SGPictureAndVideoCellID forIndexPath:indexPath];
     cell.model =self.imageAndVideos[indexPath.item];
+    cell.selectedResourceBlock = ^(NSString * _Nonnull resourceUrl) {
+        [collectionView reloadData];
+    };
     return cell;
 }
 

@@ -26,15 +26,9 @@
 
 static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
 
--(NSMutableArray *)imageUrls{
-    if (_imageUrls == nil) {
-        _imageUrls = [NSMutableArray array];
-    }
-    return _imageUrls;
-}
-
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.imageUrls = [NSMutableArray array];
     [self.collectionView registerNib:[UINib nibWithNibName:FXZSBatchPictureItemCellID bundle:nil] forCellWithReuseIdentifier:FXZSBatchPictureItemCellID];
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.itemSize = CGSizeMake(70, 70);
@@ -43,7 +37,12 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     FXZSBatchPictureItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FXZSBatchPictureItemCellID forIndexPath:indexPath];
-    cell.imageUrl = self.imageUrls[indexPath.row];
+    if (self.type == 0) {
+       cell.imageUrl = self.imageUrls[indexPath.row];
+    }else{
+        cell.fileImage = self.imageUrls[indexPath.row];
+    }
+    
     cell.delegate = self;
     return cell;
 }
@@ -52,9 +51,28 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
     return self.imageUrls.count;
 }
 
+-(void)setType:(FXZSBatchType)type{
+    _type = type;
+}
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     SGPictureAndVideoController *videoVC = [[SGPictureAndVideoController alloc]init];
+    videoVC.refreshDataBlock = ^(NSArray * _Nonnull resourceUrls) {
+         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, resourceUrls.count)];
+        [self.imageUrls removeAllObjects];
+      
+        [self.imageUrls addObject: self.type ? [UIImage imageNamed:@"AddMedia"] : @"AddMedia"];
+        
+        [self.imageUrls insertObjects:resourceUrls atIndexes:indexSet];
+        
+        if (self.imageUrls.count >= 4 || self.type ) {
+            [self.imageUrls removeLastObject];
+        }
+        [collectionView reloadData];
+    };
+    videoVC.type =self.type;
+    
     
     [self.rootVC.navigationController pushViewController:videoVC animated:YES];
     
@@ -104,10 +122,13 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
     _batch = batch;
     [self.topButton setTitle:batch.name forState:UIControlStateNormal];
     [self.topButton setImage:[UIImage imageNamed:batch.icon] forState:UIControlStateNormal];
-    
-    if (!self.imageUrls.count) {
+    [self.imageUrls removeAllObjects];
+    if (self.type == 0) {
         [self.imageUrls addObject:batch.detail];
+    }else{
+        [self.imageUrls addObject:[UIImage imageNamed:@"AddMedia"]];
     }
+  
     
     [self.collectionView reloadData];
 }
@@ -116,7 +137,7 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
 -(void)sgFarmActivitiyPictureItemCellDelted:(FXZSBatchPictureItemCell *)itemCell{
     NSIndexPath *path = [self.collectionView indexPathForCell:itemCell];
     if ([self.delegate respondsToSelector:@selector(sgFarmActivitiyPictureCellDeleted:)]) {
-        [self.delegate sgFarmActivitiyPictureCellDeleted:path];
+        [self.delegate fXZSBatchPictureCellDeleted:path];
     }
 }
 

@@ -26,10 +26,17 @@
     if ([imageUrl isEqualToString:@"AddMedia"]) {
         self.iconView.image = [UIImage imageNamed:@"AddMedia"];
     }else{
-         NSString *dwonLoadUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,kImagePre,imageUrl];
-        [self.iconView sd_setImageWithURL:[NSURL URLWithString:dwonLoadUrl] placeholderImage:[UIImage imageNamed:@"AddMedia"]];
+        [self.iconView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"AddMedia"]];
+         //NSString *dwonLoadUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,kImagePre,imageUrl];
     }
 }
+
+-(void)setFileImage:(UIImage *)fileImage{
+    _fileImage = fileImage;
+    
+    self.iconView.image = fileImage;
+}
+
 
 - (IBAction)deletedAciton:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(sgFarmActivitiyPictureItemCellDelted:)]) {

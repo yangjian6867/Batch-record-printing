@@ -36,4 +36,8 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define kWindown [UIApplication sharedApplication].delegate.window
 
+
+#define PlaceholderImage [UIImage imageNamed:@"defaultImage"]
+#define PlaceholderVideo [UIImage imageNamed:@"videoplay"]
+
 #endif /* PrefixHeader_pch */

@@ -227,4 +227,35 @@
     return newImage;
     
 }
+
++(UIImage *)firstFrameWithVideoURL:(NSURL *)url{
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetGen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    CGImageRef image = [assetGen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *videoImage = [[UIImage alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    if (!error) {
+        return videoImage;
+    }
+    return nil;
+    
+    //    NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
+    //    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
+    //    AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:urlAsset];
+    //    generator.appliesPreferredTrackTransform = YES;
+    //    generator.maximumSize = CGSizeMake(size.width, size.height);
+    //    NSError *error = nil;
+    //    CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(0, 10) actualTime:NULL error:&error];
+    //    {
+    //        return [UIImage imageWithCGImage:img];
+    //    }
+    //    return nil;
+}
+
+
 @end

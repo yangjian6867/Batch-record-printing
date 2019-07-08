@@ -96,6 +96,8 @@
 
     if ([batch.type isEqualToString:@"collectionView"]) {//如果是图片cell
         FXZSBatchPictureCell *cell = [tableView dequeueReusableCellWithIdentifier:FXZSBatchPictureCellID forIndexPath:indexPath];
+        cell.rootVC = self;
+        cell.type = [batch.name containsString:@"图片"] ? FXZSBatchTypePicture : FXZSBatchTypeVideo;
         cell.batch = batch;
         return cell;
     }else if ([batch.type isEqualToString:@"textView"]){//如果是备注cell

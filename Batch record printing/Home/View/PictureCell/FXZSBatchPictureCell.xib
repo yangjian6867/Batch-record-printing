@@ -60,7 +60,7 @@
                 <outlet property="collectionView" destination="ySA-mT-OUV" id="HjB-om-0XY"/>
                 <outlet property="topButton" destination="WvW-HN-3X0" id="iq5-sd-So5"/>
             </connections>
-            <point key="canvasLocation" x="-448" y="87.256371814092958"/>
+            <point key="canvasLocation" x="-382" y="73"/>
         </tableViewCell>
     </objects>
     <resources>

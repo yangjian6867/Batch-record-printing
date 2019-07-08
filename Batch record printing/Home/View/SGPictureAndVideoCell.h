@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "SGImageAndVideoModel.h"
 
-typedef void (^SGPictureAndVideoBlock) (SGImageAndVideoModel*);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SGPictureAndVideoCell : UICollectionViewCell
 @property(nonatomic,strong)SGImageAndVideoModel *model;
-@property(nonatomic,copy)SGPictureAndVideoBlock block;
+@property(nonatomic,copy)void (^selectedResourceBlock) (NSString *resourceUrl);
 @property(nonatomic,assign)BOOL isHiddenBtn;
 @property (nonatomic,copy)NSString *fromType;
 @property(nonatomic,strong)NSArray *selectedModels;

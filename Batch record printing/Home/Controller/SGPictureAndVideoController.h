@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef void(^refreshDataBlock)();
+#import "FXZSBatchPictureCell.h"
+#import "SGImageAndVideoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SGPictureAndVideoController : UICollectionViewController
-- (void)loadDataFromHttp;
+@interface SGPictureAndVideoController : UIViewController
 @property(nonatomic,strong)NSMutableArray *imageAndVideos;
 @property (nonatomic,assign)BOOL isFromDeleted;
-@property (nonatomic,assign)refreshDataBlock block;
+@property (nonatomic,copy)void (^refreshDataBlock)(NSArray *resourceUrls);
+@property (nonatomic,assign)FXZSBatchType type;
 @end
 
 NS_ASSUME_NONNULL_END

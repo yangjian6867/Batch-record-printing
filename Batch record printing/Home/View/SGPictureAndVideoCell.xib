@@ -31,14 +31,14 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GpA-ru-HYB">
-                        <rect key="frame" x="147" y="0.0" width="30" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GpA-ru-HYB">
+                        <rect key="frame" x="127" y="0.0" width="50" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="J65-mO-QEc"/>
-                            <constraint firstAttribute="width" constant="30" id="scv-yj-dMd"/>
+                            <constraint firstAttribute="width" constant="50" id="Ige-co-fbh"/>
+                            <constraint firstAttribute="height" constant="50" id="Kgc-hH-RPK"/>
                         </constraints>
-                        <state key="normal" backgroundImage="photo_def_previewVc"/>
-                        <state key="selected" backgroundImage="photo_sel_previewVc"/>
+                        <state key="normal" image="photo_def_previewVc"/>
+                        <state key="selected" image="photo_sel_previewVc"/>
                         <connections>
                             <action selector="selectedAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="yQM-9m-MeH"/>
                         </connections>
@@ -55,7 +55,8 @@
             </view>
             <constraints>
                 <constraint firstItem="4TD-3H-EzR" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="5O4-0n-eIg"/>
-                <constraint firstAttribute="trailing" secondItem="GpA-ru-HYB" secondAttribute="trailing" id="BkD-4q-5gL"/>
+                <constraint firstItem="GpA-ru-HYB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EWG-pd-bWI"/>
+                <constraint firstAttribute="trailing" secondItem="GpA-ru-HYB" secondAttribute="trailing" id="JcK-it-Fsg"/>
                 <constraint firstItem="9uY-Lu-qpI" firstAttribute="top" secondItem="zx7-Iq-L9g" secondAttribute="bottom" id="MCs-ds-h64"/>
                 <constraint firstItem="zx7-Iq-L9g" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Qf9-W7-5N6"/>
                 <constraint firstItem="9uY-Lu-qpI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Qi4-iZ-gdo"/>
@@ -63,7 +64,6 @@
                 <constraint firstAttribute="trailing" secondItem="zx7-Iq-L9g" secondAttribute="trailing" id="h4K-VF-YlE"/>
                 <constraint firstAttribute="bottom" secondItem="9uY-Lu-qpI" secondAttribute="bottom" id="m5f-fg-Pq1"/>
                 <constraint firstAttribute="trailing" secondItem="9uY-Lu-qpI" secondAttribute="trailing" id="o7N-Eq-mhY"/>
-                <constraint firstItem="GpA-ru-HYB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xSS-VR-4z8"/>
                 <constraint firstItem="zx7-Iq-L9g" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xT2-1S-KC4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>

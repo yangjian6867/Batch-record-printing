@@ -11,20 +11,26 @@
 @class FXZSBatchPictureCell;
 
 
-@protocol SGFarmActivitiyPictureCellDelegate <NSObject>
+typedef enum : NSUInteger {
+    FXZSBatchTypePicture,
+    FXZSBatchTypeVideo,
+} FXZSBatchType;
 
--(void)sgFarmActivitiyPictureCellClick:(NSIndexPath*)indexPath;
+@protocol FXZSBatchPictureCellDelegate <NSObject>
 
--(void)sgFarmActivitiyPictureCellDeleted:(NSIndexPath *)indexPath;
+-(void)fXZSBatchPictureCellClick:(NSIndexPath *_Nonnull)indexPath;
+
+-(void)fXZSBatchPictureCellDeleted:(NSIndexPath *_Nonnull)indexPath;
 @end
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FXZSBatchPictureCell : UITableViewCell
-@property (nonatomic,assign)id<SGFarmActivitiyPictureCellDelegate> delegate;
+@property (nonatomic,assign)id<FXZSBatchPictureCellDelegate> delegate;
 @property (nonatomic,strong)ZSBatch *batch;
-@property (nonatomic,strong)UIViewController *rootVC
+@property (nonatomic,strong)UIViewController *rootVC;
+@property (nonatomic,assign)FXZSBatchType type;
 @end
 
 NS_ASSUME_NONNULL_END

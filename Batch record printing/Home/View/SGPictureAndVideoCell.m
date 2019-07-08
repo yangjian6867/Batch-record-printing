@@ -7,7 +7,6 @@
 //
 
 #import "SGPictureAndVideoCell.h"
-#import "UIimage+XB.h"
 #import <AVKit/AVKit.h>
 @interface SGPictureAndVideoCell ()
 
@@ -42,8 +41,10 @@
 
 
 -(void)isGotoDownload{
-    self.model.fullPath = [KCachesPath stringByAppendingPathComponent:self.model.resourceUrl.lastPathComponent];
-    if ([kFileManager fileExistsAtPath:self.model.fullPath]) {//如果文件存在
+    
+    self.model.fullPath = [[NSFileManager cachesPath] stringByAppendingPathComponent:self.model.resourceUrl.lastPathComponent];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.model.fullPath]) {//如果文件存在
         self.model.filePath = [NSURL fileURLWithPath:self.model.fullPath];
         self.model.fileImage = [UIImage firstFrameWithVideoURL:self.model.filePath];
         self.imageView.image = self.model.fileImage;
@@ -65,7 +66,7 @@
         //下载进度监听
         //NSLog(@"Progress:----%.2f%",100.0*downloadProgress.completedUnitCount/downloadProgress.totalUnitCount);
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        NSString *fullPath = [KCachesPath stringByAppendingPathComponent:self.model.resourceUrl.lastPathComponent];
+        NSString *fullPath = [[NSFileManager cachesPath] stringByAppendingPathComponent:self.model.resourceUrl.lastPathComponent];
         NSLog(@"fullPath:%@",fullPath);
         NSLog(@"targetPath:%@",targetPath);
         return [NSURL fileURLWithPath:fullPath];
@@ -97,9 +98,8 @@
 
 - (IBAction)selectedAction:(UIButton *)sender {
     self.model.isSelected = !sender.selected;
-    if (self.block) {
-        self.block(self.model);
-    }
+    self.selectedResourceBlock(self.model.resourceUrl);
+    
 }
 
 

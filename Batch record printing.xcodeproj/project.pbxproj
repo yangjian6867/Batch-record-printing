@@ -69,7 +69,6 @@
 		C7E3699A22CE452500413782 /* FXZSBatchPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E3698E22CE452500413782 /* FXZSBatchPictureCell.m */; };
 		C7E3699B22CE452500413782 /* FXZSBatchPictureItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E3698F22CE452500413782 /* FXZSBatchPictureItemCell.xib */; };
 		C7E3699C22CE452500413782 /* FXZSBatchPictureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E3699122CE452500413782 /* FXZSBatchPictureCell.xib */; };
-		C7E3699D22CE452500413782 /* SGFarmActivitiyPictureItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E3699422CE452500413782 /* SGFarmActivitiyPictureItemCell.xib */; };
 		C7E3699E22CE452500413782 /* FXZSBatchPictureItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E3699522CE452500413782 /* FXZSBatchPictureItemCell.m */; };
 		C7E3699F22CE452500413782 /* FXZSBatchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E3699622CE452500413782 /* FXZSBatchViewCell.xib */; };
 		C7E369BE22CE454100413782 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E369A322CE454100413782 /* TZImageCropManager.m */; };
@@ -236,9 +235,7 @@
 		C7E3698F22CE452500413782 /* FXZSBatchPictureItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FXZSBatchPictureItemCell.xib; sourceTree = "<group>"; };
 		C7E3699022CE452500413782 /* FXZSBatchPictureItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXZSBatchPictureItemCell.h; sourceTree = "<group>"; };
 		C7E3699122CE452500413782 /* FXZSBatchPictureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FXZSBatchPictureCell.xib; sourceTree = "<group>"; };
-		C7E3699222CE452500413782 /* SGFarmActivitiyPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGFarmActivitiyPictureCell.h; sourceTree = "<group>"; };
 		C7E3699322CE452500413782 /* FXZSBatchPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXZSBatchPictureCell.h; sourceTree = "<group>"; };
-		C7E3699422CE452500413782 /* SGFarmActivitiyPictureItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGFarmActivitiyPictureItemCell.xib; sourceTree = "<group>"; };
 		C7E3699522CE452500413782 /* FXZSBatchPictureItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXZSBatchPictureItemCell.m; sourceTree = "<group>"; };
 		C7E3699622CE452500413782 /* FXZSBatchViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FXZSBatchViewCell.xib; sourceTree = "<group>"; };
 		C7E369A122CE454100413782 /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewCell.h; sourceTree = "<group>"; };
@@ -471,16 +468,16 @@
 		C71F423222C2038800333804 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
-				C71F423322C2038800333804 /* UIImageView+LBBlurredImage.h */,
-				C71F423422C2038800333804 /* UIImage+Addition.m */,
-				C71F423522C2038800333804 /* UIImage+ImageEffects.h */,
-				C71F423622C2038800333804 /* UIImage+Cut.m */,
-				C71F423722C2038800333804 /* UIImageView+Addition.m */,
-				C71F423822C2038800333804 /* UIImageView+LBBlurredImage.m */,
-				C71F423922C2038800333804 /* UIImage+ImageEffects.m */,
-				C71F423A22C2038800333804 /* UIImage+Addition.h */,
-				C71F423B22C2038800333804 /* UIImageView+Addition.h */,
 				C71F423C22C2038800333804 /* UIImage+Cut.h */,
+				C71F423622C2038800333804 /* UIImage+Cut.m */,
+				C71F423A22C2038800333804 /* UIImage+Addition.h */,
+				C71F423422C2038800333804 /* UIImage+Addition.m */,
+				C71F423B22C2038800333804 /* UIImageView+Addition.h */,
+				C71F423722C2038800333804 /* UIImageView+Addition.m */,
+				C71F423522C2038800333804 /* UIImage+ImageEffects.h */,
+				C71F423922C2038800333804 /* UIImage+ImageEffects.m */,
+				C71F423322C2038800333804 /* UIImageView+LBBlurredImage.h */,
+				C71F423822C2038800333804 /* UIImageView+LBBlurredImage.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -675,14 +672,12 @@
 		C7E3698D22CE452500413782 /* PictureCell */ = {
 			isa = PBXGroup;
 			children = (
-				C7E3698E22CE452500413782 /* FXZSBatchPictureCell.m */,
-				C7E3698F22CE452500413782 /* FXZSBatchPictureItemCell.xib */,
-				C7E3699022CE452500413782 /* FXZSBatchPictureItemCell.h */,
-				C7E3699122CE452500413782 /* FXZSBatchPictureCell.xib */,
-				C7E3699222CE452500413782 /* SGFarmActivitiyPictureCell.h */,
 				C7E3699322CE452500413782 /* FXZSBatchPictureCell.h */,
-				C7E3699422CE452500413782 /* SGFarmActivitiyPictureItemCell.xib */,
+				C7E3698E22CE452500413782 /* FXZSBatchPictureCell.m */,
+				C7E3699122CE452500413782 /* FXZSBatchPictureCell.xib */,
+				C7E3699022CE452500413782 /* FXZSBatchPictureItemCell.h */,
 				C7E3699522CE452500413782 /* FXZSBatchPictureItemCell.m */,
+				C7E3698F22CE452500413782 /* FXZSBatchPictureItemCell.xib */,
 			);
 			path = PictureCell;
 			sourceTree = "<group>";
@@ -969,7 +964,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C797835722B249CE00A8C252 /* LaunchScreen.storyboard in Resources */,
-				C7E3699D22CE452500413782 /* SGFarmActivitiyPictureItemCell.xib in Resources */,
 				C7FF390422B894AD00C54492 /* LoginViewController.xib in Resources */,
 				C797837822B24B4E00A8C252 /* PlantHarvest.json in Resources */,
 				065848BE22C22BA200D27ADE /* FXJIDITableViewCell.xib in Resources */,
