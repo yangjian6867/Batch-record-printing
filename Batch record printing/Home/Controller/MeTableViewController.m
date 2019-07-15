@@ -7,8 +7,13 @@
 //
 
 #import "MeTableViewController.h"
+#import "SGPictureAndVideoController.h"
+#import "SGPageInfoController.h"
+#import "FXJIDITableViewController.h"
+#import <SDWebImage/SDImageCache.h>
 
 @interface MeTableViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -19,14 +24,32 @@
     
     self.title = @"我的管家";
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.nameLabel.text = [FXUserTool sharedFXUserTool].account.account;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 1) {
+        SGPageInfoController *infoVC = [[SGPageInfoController alloc]init];
+        [self.navigationController pushViewController:infoVC animated:YES];
+    }else if (indexPath.row == 2){
+        FXJIDITableViewController *jidiVC = [[FXJIDITableViewController alloc]init];
+        jidiVC.fromMe = YES;
+        [self.navigationController pushViewController:jidiVC animated:YES];
+    }else if (indexPath.row == 3 || indexPath.row == 4) {
+        SGPictureAndVideoController *pictureVC = [[SGPictureAndVideoController alloc]init];
+        pictureVC.type = (indexPath.row == 3) ? FXZSBatchTypePicture : FXZSBatchTypeVideo;
+        pictureVC.isFromMe = YES;
+        [self.navigationController pushViewController:pictureVC animated:YES];
+    }else if (indexPath.row == 5){
+        [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
+            [SVProgressHUD showSuccessWithStatus:@"清理完成"];
+        }];
+        [SVProgressHUD showSuccessWithStatus:@"清理成功"];
+    }
+   
+}
 
 
 @end

@@ -69,6 +69,11 @@
         self.textFieldView.placeholder = [NSString stringWithFormat:@"请输入%@",batch.name];
         self.textFieldView.text = batch.detail ? batch.detail : nil;
         self.textFieldView.userInteractionEnabled = !batch.detail;
+        if ([batch.name containsString:@"基地面积"] || [batch.name containsString:@"联系方式"] || [batch.name containsString:@"收获数量"]) {
+            self.textFieldView.keyboardType = UIKeyboardTypeNumberPad;
+        }else{
+            self.textFieldView.keyboardType = UIKeyboardTypeDefault;
+        }
     }
     
     

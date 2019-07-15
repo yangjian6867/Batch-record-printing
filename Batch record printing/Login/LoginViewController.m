@@ -63,5 +63,7 @@
     }];
 }
 
+- (IBAction)registreAction:(id)sender {
+}
 
 @end

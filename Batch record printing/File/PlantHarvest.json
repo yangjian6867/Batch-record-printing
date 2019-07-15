@@ -73,7 +73,7 @@
         "name":"上传图片",
         "detail":"AddMedia",
         "type":"collectionView",
-        "key":"image",
+        "key":"imgId",
         "behavior":"photos",
         "height":130.0,
         "accessory":false
@@ -83,7 +83,7 @@
         "name":"上传视频",
         "detail":"AddMedia",
         "type":"collectionView",
-        "key":"image",
+        "key":"videoId",
         "behavior":"photos",
         "height":130.0,
         "accessory":false

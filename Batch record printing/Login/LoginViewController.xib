@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xnm-EG-fcS">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appicon-8" translatesAutoresizingMaskIntoConstraints="NO" id="xnm-EG-fcS">
                     <rect key="frame" x="157" y="94" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="QGT-ak-oSt"/>
@@ -46,10 +46,24 @@
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf4-vP-MJR">
                     <rect key="frame" x="30" y="419" width="354" height="50"/>
-                    <color key="backgroundColor" red="1" green="0.55238807130000001" blue="0.3574762333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="登录"/>
+                    <color key="backgroundColor" red="0.1215686275" green="0.78039215689999997" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="登录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
                         <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="s9L-8m-heN"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPS-ZO-RWl">
+                    <rect key="frame" x="324" y="485" width="60" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="3UI-nH-vBi"/>
+                    </constraints>
+                    <state key="normal" title="注册">
+                        <color key="titleColor" red="0.1215686275" green="0.78039215689999997" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="registreAction:" destination="-1" eventType="touchUpInside" id="CJ2-mH-30j"/>
                     </connections>
                 </button>
             </subviews>
@@ -63,7 +77,9 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="tKS-cA-oOV" secondAttribute="trailing" constant="30" id="W1I-EM-z3b"/>
                 <constraint firstItem="kf4-vP-MJR" firstAttribute="leading" secondItem="Q14-Ix-UHh" secondAttribute="leading" id="cxb-aq-jGQ"/>
                 <constraint firstItem="kf4-vP-MJR" firstAttribute="height" secondItem="Q14-Ix-UHh" secondAttribute="height" id="eJi-bM-ZWU"/>
+                <constraint firstItem="tPS-ZO-RWl" firstAttribute="top" secondItem="kf4-vP-MJR" secondAttribute="bottom" constant="16" id="huM-QI-XWa"/>
                 <constraint firstItem="kf4-vP-MJR" firstAttribute="trailing" secondItem="Q14-Ix-UHh" secondAttribute="trailing" id="mXY-5C-vPf"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="tPS-ZO-RWl" secondAttribute="trailing" constant="30" id="oCf-uG-tUt"/>
                 <constraint firstItem="Q14-Ix-UHh" firstAttribute="trailing" secondItem="tKS-cA-oOV" secondAttribute="trailing" id="roh-98-V5H"/>
                 <constraint firstItem="Q14-Ix-UHh" firstAttribute="height" secondItem="tKS-cA-oOV" secondAttribute="height" id="s4F-la-qWj"/>
                 <constraint firstItem="Q14-Ix-UHh" firstAttribute="top" secondItem="tKS-cA-oOV" secondAttribute="bottom" constant="15" id="wT2-HP-jWF"/>
@@ -73,4 +89,7 @@
             <point key="canvasLocation" x="-41" y="90"/>
         </view>
     </objects>
+    <resources>
+        <image name="appicon-8" width="1024" height="1024"/>
+    </resources>
 </document>

@@ -7,12 +7,12 @@
 //
 
 #import "SGPictureAndVideoController.h"
-
+#import "TZImagePickerController.h"
 #import "SGPictureAndVideoCell.h"
 
 #define kPictureVideoitemW (UIScreen.screen_width - 30)/2
 
-@interface SGPictureAndVideoController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface SGPictureAndVideoController ()<UICollectionViewDelegate,UICollectionViewDataSource,TZImagePickerControllerDelegate>
 @property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,assign)NSUInteger pageNum;
 @end
@@ -32,7 +32,10 @@ static NSString *const SGPictureAndVideoCellID = @"SGPictureAndVideoCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.pageNum = 1;
-   
+    
+    
+    self.title = (self.type == FXZSBatchTypeVideo) ? @"选择视频" : @"选择图片";
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
@@ -50,16 +53,89 @@ static NSString *const SGPictureAndVideoCellID = @"SGPictureAndVideoCell";
     [self.view addSubview:self.collectionView];
      [self loadNewItems];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(saveAction)];
+    if (self.isFromMe) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPicture)];
+    }else{
+       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(saveAction)];
+    }
 }
+
+
+-(void)addPicture{
+    TZImagePickerController *imagePickController = [[TZImagePickerController alloc] initWithMaxImagesCount:5 delegate:self];
+    imagePickController.allowPickingVideo = (self.type == FXZSBatchTypeVideo);
+    // 是否允许显示图片
+    imagePickController.allowPickingImage = !(self.type == FXZSBatchTypeVideo);
+    [self presentViewController:imagePickController animated:YES completion:nil];
+}
+
+
+-(void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto{
+    
+    NSMutableArray *fileNames = [NSMutableArray array];
+    NSMutableArray *fileUrls = [NSMutableArray array];
+    dispatch_group_t group = dispatch_group_create();
+    
+    [SVProgressHUD show];
+    for (int i = 0; i<photos.count; i++) {
+        NSData *data = UIImagePNGRepresentation(photos[i]);
+        NSString *fileName = [assets[i]valueForKeyPath:@"filename"];
+        [fileNames addObject:fileName];
+        dispatch_group_enter(group);
+        [[NetWorkTools sharedNetWorkTools]uploadFileWithPath:upload fileData:data fileName:fileName progress:^(NSProgress *progress) {
+            NSLog(@"第%d张图片上传进度:%.2f",i+1,1.0 * progress.completedUnitCount / progress.totalUnitCount);
+        } success:^(NSString *filePath) {
+            NSLog(@"第%d张图片成功路径是filePath = %@",i,filePath);
+            [fileUrls addObject:filePath];
+            dispatch_group_leave(group);
+        } failure:^(NSError * _Nonnull error) {
+            NSLog(@"error = %@",error);
+            [SVProgressHUD dismiss];
+        }];
+    }
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"图片全部上传完成");
+       
+        dispatch_group_t AllsuccessGroup = dispatch_group_create();
+        NSString *userId = [FXUserTool sharedFXUserTool].account.userId;
+        for (int i = 0; i<fileNames.count; i++) {
+            NSString *urls = fileUrls[i];
+            NSString *fileName = fileNames[i];
+            dispatch_group_enter(AllsuccessGroup);
+            [[NetWorkTools sharedNetWorkTools]requestWithType:RequesTypePOST urlString:addTtsScltxxcjMedia parms:@{@"userId":userId,@"urls":urls,@"fileNames":fileName,@"types":@"image"} success:^(id JSON) {
+                NSLog(@"JSON = %@",JSON);
+                dispatch_group_leave(AllsuccessGroup);
+            } :^(NSError *error) {
+                [SVProgressHUD dismiss];
+            }];
+        }
+        
+        dispatch_group_notify(AllsuccessGroup, dispatch_get_main_queue(), ^{
+            [SVProgressHUD showSuccessWithStatus:@"全部上传成功"];
+            [self loadNewItems];
+        });
+
+    });
+    
+    
+}
+
+
+
 
 -(void)saveAction{
     
     NSMutableArray *selectedArr = [NSMutableArray array];
     for (SGImageAndVideoModel *model in self.imageAndVideos) {
         if (model.isSelected) {
-            [selectedArr addObject: [model.resourceType containsString:@"video"] ? model.fileImage :  model.resourceUrl];
+            [selectedArr addObject: model];
         }
+    }
+    
+    if (selectedArr.count == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请至少选择一项"];
+        return;
     }
     
     if (self.type == 0) {
@@ -73,8 +149,6 @@ static NSString *const SGPictureAndVideoCellID = @"SGPictureAndVideoCell";
             return;
         }
     }
-    
-    
     
     self.refreshDataBlock(selectedArr);
     [self.navigationController popViewControllerAnimated:YES];
@@ -113,6 +187,7 @@ static NSString *const SGPictureAndVideoCellID = @"SGPictureAndVideoCell";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     SGPictureAndVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SGPictureAndVideoCellID forIndexPath:indexPath];
+    cell.isFromMe = self.isFromMe;
     cell.model =self.imageAndVideos[indexPath.item];
     cell.selectedResourceBlock = ^(NSString * _Nonnull resourceUrl) {
         [collectionView reloadData];

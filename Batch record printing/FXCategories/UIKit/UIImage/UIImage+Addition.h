@@ -35,8 +35,8 @@
 
 + (UIImage *)resizableImageWithImageName:(NSString *)imageName;
 
-
-
+//根据一种颜色生产对应颜色的Image;
++ (UIImage *)imageWithColor:(UIColor *)color;
 
 
 /** 压缩图片到指定的物理大小*/

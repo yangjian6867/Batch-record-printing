@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)ZSBatch *batch;
 @property (nonatomic,strong)UIViewController *rootVC;
 @property (nonatomic,assign)FXZSBatchType type;
+@property (nonatomic,assign)BOOL fromPiCi;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -2,45 +2,50 @@
     {
         "icon":"icon_zhutiname",
         "name":"基地名称",
-        "type":"textLabel"
+        "type":"textField",
+        "key":"name"
     },
     {
         "icon":"iocn_quyu",
         "name":"所属区域",
-        "type":"textLabel"
+        "type":"textLabel",
+        "key":"addressName"
     },
     {
         "icon":"icon-jingweidu",
         "name":"基地地址",
-        "type":"textField"
+        "type":"textField",
+        "key":"address"
     },
     {
         "icon":"icon_pingfang",
         "name":"基地面积",
-        "type":"textLabel",
-        "key":"brandName"
+        "type":"textField",
+        "key":"area"
     },
     {
         "icon":"icon_zhuangtai",
         "name":"基地负责人",
         "type":"textField",
-        "key":"brandName"
+        "key":"manager"
     },
     {
         "icon":"icon_phone",
         "name":"联系方式",
         "type":"textField",
-        "key":"brandName"
+        "key":"phone"
     },
     {
         "icon":"icon_zhuangtai",
         "name":"基地状态",
-        "type":"textLabel"
+        "type":"textLabel",
+        "key":"status"
     },
     {
         "icon":"icon_image",
         "name":"基地图片",
         "detail":"AddMedia",
+        "key":"picture",
         "type":"collectionView",
         "height":130.0
     }

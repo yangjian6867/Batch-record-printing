@@ -22,6 +22,8 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    
+    
     [SVProgressHUD setMinimumDismissTimeInterval:0.1];
    
     

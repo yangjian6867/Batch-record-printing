@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy)NSString *name;
 @property (nonatomic,copy)NSString *detail;
 @property (nonatomic,copy)NSString *detailID;   //有些选择单位传的是ID不是千克或者克
+
+@property (nonatomic,copy)NSString *codedetail;
+
 @property (nonatomic,copy)NSString *type;
 @property (nonatomic,copy)NSString *key;
 @property (nonatomic,copy)NSString *behavior;

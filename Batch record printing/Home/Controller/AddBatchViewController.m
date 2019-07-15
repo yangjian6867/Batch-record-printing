@@ -16,6 +16,7 @@
 #import "FXZSBatchRemarkCell.h"
 #import "ZSProduct.h"
 #import "ZSProductUnit.h"
+#import "SGImageAndVideoModel.h"
 
 @interface AddBatchViewController ()<UIDocumentPickerDelegate,UIDocumentInteractionControllerDelegate,KXPickerViewDelegate,KXDatePickerViewDelegate>
 @property (nonatomic,strong)NSArray *productes;
@@ -69,7 +70,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"批次管理";
+    self.title = @"新建批次";
     
     [self getDataFromFile:@"PlantHarvest"];
     [self.tableView registerNib:[UINib nibWithNibName:@"FXZSBatchViewCell" bundle:nil] forCellReuseIdentifier:FXZSBatchViewCellID];
@@ -97,7 +98,7 @@
     if ([batch.type isEqualToString:@"collectionView"]) {//如果是图片cell
         FXZSBatchPictureCell *cell = [tableView dequeueReusableCellWithIdentifier:FXZSBatchPictureCellID forIndexPath:indexPath];
         cell.rootVC = self;
-        cell.type = [batch.name containsString:@"图片"] ? FXZSBatchTypePicture : FXZSBatchTypeVideo;
+        cell.fromPiCi = YES;
         cell.batch = batch;
         return cell;
     }else if ([batch.type isEqualToString:@"textView"]){//如果是备注cell
@@ -235,7 +236,6 @@
     
     Account *count = [FXUserTool sharedFXUserTool].account;
     
-    
     for (ZSBatch *batch in self.datas) {
         if (!batch.detail) {
             NSString *popMessage = [NSString stringWithFormat:@"请%@%@",[batch.type isEqualToString:@"textLabel"] ? @"选择":@"输入",batch.name];
@@ -245,15 +245,32 @@
     }
     
     for (ZSBatch *batch in self.datas) {
+        if ([batch.detail containsString:@"AddMedia"]) {
+            batch.detail = @"";
+        }
         [self.uploadDict setValue:batch.detailID ? batch.detailID : batch.detail forKey:batch.key];
     }
-    
+
     //补充字段
     self.uploadDict[@"joinFlag"] = @"1";
      self.uploadDict[@"productIndustry"] = @"01";
     self.uploadDict[@"tempEnId"] = count.userId;
+    NSMutableArray *tempArr1 = [NSMutableArray array];
+    [self.uploadDict setObject:tempArr1 forKey:@"spybIds"];
     NSLog(@"self.uploadDict = %@",self.uploadDict);
     
+    
+    
+    [[NetWorkTools sharedNetWorkTools]requestWithType:RequesTypePOST urlString:addCppcdj parms:self.uploadDict success:^(id JSON) {
+        NSLog(@"JSON = %@",JSON);
+        if ([JSON[@"httpCode"]intValue] == 200) {
+            self.refreshDataBlock();
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+       
+    } :^(NSError *error) {
+        
+    }];
     
     
 }

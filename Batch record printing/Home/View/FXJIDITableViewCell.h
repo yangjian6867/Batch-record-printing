@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FXJIDITableViewCell : UITableViewCell
 @property (nonatomic,strong)FXJIDIModel *model;
+
 @property (nonatomic,copy) void (^clickBlock) (FXJIDIModel *currentModel);
 
 @end

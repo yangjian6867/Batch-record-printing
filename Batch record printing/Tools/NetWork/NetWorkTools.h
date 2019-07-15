@@ -22,8 +22,14 @@ typedef enum : NSUInteger {
 single_interface(NetWorkTools)
 
 -(void)requestWithType:(RequesType)type urlString:(NSString *)urlStr parms:(NSDictionary *)parms success:(HttpSuccessBlock)success :(HttpFailureBlock)failure;
-
+//下载文件
 -(void)downloadWithPath:(NSString *)path completionHandler:(void(^)(NSURL *filePath, NSError *error))completionHandler;
+//上传文件
 
+-(void)uploadFileWithPath:(NSString *)path
+                 fileData:(NSData *)data
+                 fileName:(NSString *)name progress:(nullable void (^)(NSProgress * progress))uploadProgressBlock
+                 success:(nullable void (^)(NSString * filePath))success
+                 failure:(nullable void (^)(NSError * _Nonnull error))failure;
 @end
 

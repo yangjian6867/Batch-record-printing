@@ -24,6 +24,11 @@
  */
 + (void)appendMethod:(SEL)newMethod fromClass:(Class)klass;
 
+//获取一个对象中说有的属性值、
+//class_copyPropertyList返回的仅仅是对象类的属性(@property申明的属性)，
+//class_copyIvarList返回类的所有属性和变量(包括在@interface大括号中声明的变量)
+-(NSMutableArray *)getPropertValues:(id)obj;
+
 /**
  *  动态为某个类替换方法
  */

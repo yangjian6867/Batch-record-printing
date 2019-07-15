@@ -31,6 +31,7 @@
     self.nameLabel.text = model.NAME;
     self.addressLabel.text = model.ADDRESS_NAME;
     self.selectedBtn.selected = model.selected;
+    self.selectedBtn.hidden = model.fromMe;
     NSString *dwonLoadUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,kImagePre,model.PICTURE];
     [self.pictureView sd_setImageWithURL:[NSURL URLWithString:dwonLoadUrl] placeholderImage:[UIImage imageNamed:@"hezuoshe"] options:(SDWebImageRetryFailed | SDWebImageLowPriority)];
 }

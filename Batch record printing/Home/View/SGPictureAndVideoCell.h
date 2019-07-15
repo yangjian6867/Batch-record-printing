@@ -15,10 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SGPictureAndVideoCell : UICollectionViewCell
 @property(nonatomic,strong)SGImageAndVideoModel *model;
 @property(nonatomic,copy)void (^selectedResourceBlock) (NSString *resourceUrl);
-@property(nonatomic,assign)BOOL isHiddenBtn;
-@property (nonatomic,copy)NSString *fromType;
 @property(nonatomic,strong)NSArray *selectedModels;
-@property (nonatomic,assign)BOOL isFromGuanJia;
+@property(nonatomic,assign)BOOL isFromMe;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UIButton *deletedBtn;
 @property (nonatomic,copy)NSString *imageUrl;
-@property (nonatomic,strong)UIImage *fileImage;
 @property (nonatomic,assign)id<sgFarmActivitiyPictureItemCellDelegate> delegate;
 @end
 

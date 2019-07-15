@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SGPictureAndVideoController : UIViewController
 @property(nonatomic,strong)NSMutableArray *imageAndVideos;
-@property (nonatomic,assign)BOOL isFromDeleted;
-@property (nonatomic,copy)void (^refreshDataBlock)(NSArray *resourceUrls);
+@property (nonatomic,assign)BOOL isFromMe;
+@property (nonatomic,copy)void (^refreshDataBlock)(NSArray *selectedModels);
 @property (nonatomic,assign)FXZSBatchType type;
 @end
 

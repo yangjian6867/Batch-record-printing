@@ -33,6 +33,29 @@ static NSString *const modifyProductPerson=@"/sysProductPerson/modifyProductPers
 //显示生产人
 static NSString *const showProductPerson=@"/sysProductPerson/showProductPerson";
 
+//添加批次
+static NSString *const addCppcdj= @"/sofn-tts-web-branch/ttsScltxxcjScgl/addCppcdj";
+static NSString *const getCpdjgl= @"/sofn-tts-web-branch/ttsScltxxcjScgl/getCpdjgl";
+static NSString *const getproductInfo= @"/sofn-tts-web-branch/ttsScltxxcjScgl/getproductInfo";
+static NSString *const deleteTtsScltxxcjScgl= @"/sofn-tts-web-branch/ttsScltxxcjScgl/deleteTtsScltxxcjScgl";
+
+//新增基地
+static NSString *const addTtsScltxxcjBase= @"/sofn-tts-web-branch/ttsScltxxcjBase/addTtsScltxxcjBase";
+
+//上传文件
+static NSString *const upload=  @"/sofn-tts-web-branch/ttsScltxxcjRegiter/upload";
+
+//上图视频和图片
+static NSString *const addTtsScltxxcjMedia= @"/sofn-tts-web-branch/ttsScltxxcjMedia/addTtsScltxxcjMedia";
+
+//获取产品
+static NSString *const getPageInfo=   @"/sofn-tts-web-branch/ttsScltxxcjProduct/getPageInfo";
+
+//获取区域
+static NSString *const provinceRegionCodeList=   @"/sofn-sys-web/region/provinceRegionCodeList";
+static NSString *const subRegionCodeList=  @"/sofn-sys-web/region/subRegionCodeList";
+
+static NSString *const fileUrl= @"/sofn-sys-web/sysTemplate/downPic?fileUrl=";
 
 static NSString *const FXZSBatchViewCellID = @"FXZSBatchViewCell";
 static NSString *const FXZSBatchPictureCellID = @"FXZSBatchPictureCell";

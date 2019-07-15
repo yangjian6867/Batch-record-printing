@@ -23,6 +23,8 @@
 -(void)hookAddObject:(id)anObject{
     if (anObject) {
         [self hookAddObject:anObject];
+    }else{
+        [self hookAddObject:@"无"];
     }
 }
 

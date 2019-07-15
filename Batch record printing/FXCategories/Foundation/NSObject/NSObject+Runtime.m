@@ -112,6 +112,22 @@ void method_replace(Class toClass, Class fromClass, SEL selector)
     method_swizzle(self.class, originalMethod, newMethod);
 }
 
+
+-(NSMutableArray *)getPropertValues:(id)obj{
+    unsigned int count;
+    NSMutableArray *arr = [NSMutableArray array];
+    objc_property_t *properties = class_copyPropertyList([obj class], &count);
+    for(int i=0;i<count;i++){
+        objc_property_t property = properties[i];
+        const char *propertyName =  property_getName(property);
+        NSString *key = [[NSString alloc]initWithCString:propertyName encoding:NSUTF8StringEncoding];
+        //kvc读值
+        NSString *value = [obj valueForKey:key];
+        [arr addObject:value];
+    }
+    return arr;
+}
+
 -(void)swizzleMethod:(SEL)originalSelector swizzledSelector:(SEL)swizzledSelector{
     Class class = [self class];
     

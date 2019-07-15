@@ -11,6 +11,7 @@
 @interface FXZSBatchPictureItemCell ()
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *bofangBtn;
 
 @end
 
@@ -23,18 +24,39 @@
 
 -(void)setImageUrl:(NSString *)imageUrl{
     _imageUrl = imageUrl;
+    
     if ([imageUrl isEqualToString:@"AddMedia"]) {
         self.iconView.image = [UIImage imageNamed:@"AddMedia"];
+    }else if ([imageUrl hasPrefix:@"http"]) {
+        [self.iconView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageWithColor:[UIColor lightGrayColor]]];
+    }else if ([imageUrl.pathExtension isEqualToString:@"mp4"]){
+        imageUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,fileUrl,imageUrl];
+        [self isGotoDownload:imageUrl];
+        self.bofangBtn.hidden = NO;
     }else{
-        [self.iconView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"AddMedia"]];
-         //NSString *dwonLoadUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,kImagePre,imageUrl];
+        imageUrl = [NSString stringWithFormat:@"%@%@%@",MaiURL,fileUrl,imageUrl];
+        [self.iconView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageWithColor:[UIColor lightGrayColor]] options:SDWebImageRetryFailed];
     }
 }
 
--(void)setFileImage:(UIImage *)fileImage{
-    _fileImage = fileImage;
+
+-(void)isGotoDownload:(NSString *)path{
+
+    NSString *fullPath = [[NSFileManager cachesPath] stringByAppendingPathComponent:path.lastPathComponent];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {//如果文件存在
+        self.iconView.image = [UIImage firstFrameWithVideoURL:[NSURL fileURLWithPath:fullPath]];
+    }else{
+        self.iconView.image = [UIImage imageWithColor:[UIColor lightGrayColor]];
+        [self download:path];
+    }
+}
+
+
+- (void)download:(NSString *)path{
     
-    self.iconView.image = fileImage;
+    [[NetWorkTools sharedNetWorkTools]downloadWithPath:path completionHandler:^(NSURL *filePath, NSError *error) {
+        self.iconView.image =[UIImage firstFrameWithVideoURL:filePath];
+    }];
 }
 
 

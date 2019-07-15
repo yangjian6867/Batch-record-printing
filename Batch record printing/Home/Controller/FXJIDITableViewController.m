@@ -32,18 +32,43 @@ static NSString *const FXJIDITableViewCellID = @"FXJIDITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"选择基地";
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureAction)];
+    if (self.fromMe) {
+        self.title = @"基地管理";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addJiDI)];
+    }else{
+        self.title = @"选择基地";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(sureAction)];
+    }
     
     [self.tableView registerNib:[UINib nibWithNibName:FXJIDITableViewCellID bundle:nil] forCellReuseIdentifier:FXJIDITableViewCellID];
     self.tableView.rowHeight = 70;
     
+    [self loadNewItems];
+}
+
+-(void)loadNewItems{
+    [self.jidiListArr removeAllObjects];
     [FXJIDiViewModel getJIDiList:^(NSArray<FXJIDIModel *> * models) {
+        
+        for (FXJIDIModel *model in models) {
+            model.fromMe = self.fromMe;
+        }
+        
         [self.jidiListArr addObjectsFromArray:models];
         [self.tableView reloadData];
     }];
 }
+
+-(void)addJiDI{
+    FXJiDiInfoViewController *infoVc = [[FXJiDiInfoViewController alloc]init];
+    infoVc.fromMe = self.fromMe;
+    infoVc.refreshDataBlock = ^{
+        [self loadNewItems];
+    };
+    
+    [self.navigationController pushViewController:infoVc animated:YES];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.jidiListArr.count;

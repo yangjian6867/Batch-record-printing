@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "FXJIDIModel.h"
+#import "KXPickerView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FXJiDiInfoViewController : UITableViewController
 @property (nonatomic,strong)FXJIDIModel *selectedJiDi;
+@property (nonatomic,assign)BOOL fromMe;
+@property (nonatomic, strong)KXPickerView *pickView;
+@property (nonatomic,copy)void (^refreshDataBlock)();
 @end
 
 NS_ASSUME_NONNULL_END

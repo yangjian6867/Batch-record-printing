@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)ZSBatch *selectedBatch;
 @property (nonatomic,assign)BOOL haveFile;
 @property (nonatomic,strong)NSIndexPath *selectedIndexPath;
+@property (nonatomic,copy)void (^refreshDataBlock)();
 @end
 
 NS_ASSUME_NONNULL_END

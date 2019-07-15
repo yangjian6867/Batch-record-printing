@@ -31,11 +31,12 @@
     _model = model;
     self.titleLabel.text = model.resourceName;
     self.selectedBtn.selected = model.isSelected;
+    self.selectedBtn.hidden = self.isFromMe;
     
     if ([model.resourceType isEqualToString:@"video"]){
         [self isGotoDownload];
     }else{
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.resourceUrl] placeholderImage:PlaceholderImage];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.resourceUrl] placeholderImage:[UIImage imageWithColor:[UIColor lightGrayColor]]];
     }
 }
 
@@ -64,33 +65,22 @@
     
     NSURLSessionDownloadTask *loadTask = [manger downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         //下载进度监听
-        //NSLog(@"Progress:----%.2f%",100.0*downloadProgress.completedUnitCount/downloadProgress.totalUnitCount);
+        NSLog(@"Progress:----%.2f%%",100.0*downloadProgress.completedUnitCount/downloadProgress.totalUnitCount);
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
         NSString *fullPath = [[NSFileManager cachesPath] stringByAppendingPathComponent:self.model.resourceUrl.lastPathComponent];
-        NSLog(@"fullPath:%@",fullPath);
-        NSLog(@"targetPath:%@",targetPath);
         return [NSURL fileURLWithPath:fullPath];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        NSLog(@"filePath:%@",filePath);
-    
+
         self.model.filePath = filePath;
         self.model.fileImage =[UIImage firstFrameWithVideoURL:filePath];
         self.imageView.image = self.model.fileImage;
         self.playBtn.hidden = NO;
-        
     }];
     [loadTask resume];
 }
 
 
--(void)setIsFromGuanJia:(BOOL)isFromGuanJia{
-    _isFromGuanJia = isFromGuanJia;
-}
-
--(void)setIsHiddenBtn:(BOOL)isHiddenBtn{
-    _isHiddenBtn = isHiddenBtn;
-    self.selectedBtn.hidden = isHiddenBtn;
-}
 
 -(void)setSelectedModels:(NSArray *)selectedModels{
     _selectedModels = selectedModels;

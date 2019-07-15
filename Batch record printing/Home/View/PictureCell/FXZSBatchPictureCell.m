@@ -37,12 +37,7 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     FXZSBatchPictureItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FXZSBatchPictureItemCellID forIndexPath:indexPath];
-    if (self.type == 0) {
-       cell.imageUrl = self.imageUrls[indexPath.row];
-    }else{
-        cell.fileImage = self.imageUrls[indexPath.row];
-    }
-    
+    cell.imageUrl = self.imageUrls[indexPath.row];
     cell.delegate = self;
     return cell;
 }
@@ -51,71 +46,82 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
     return self.imageUrls.count;
 }
 
--(void)setType:(FXZSBatchType)type{
-    _type = type;
-}
-
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    NSString *imageUrl = self.imageUrls[indexPath.row];
+    if (!self.fromPiCi) {
+        [self addPicture];
+        return;
+    }
+    
     SGPictureAndVideoController *videoVC = [[SGPictureAndVideoController alloc]init];
-    videoVC.refreshDataBlock = ^(NSArray * _Nonnull resourceUrls) {
-         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, resourceUrls.count)];
+    videoVC.refreshDataBlock = ^(NSArray * _Nonnull selectedModels) {
+         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, selectedModels.count)];
         [self.imageUrls removeAllObjects];
       
-        [self.imageUrls addObject: self.type ? [UIImage imageNamed:@"AddMedia"] : @"AddMedia"];
+        [self.imageUrls addObject: @"AddMedia"];
         
-        [self.imageUrls insertObjects:resourceUrls atIndexes:indexSet];
+        NSArray * resourceUrls = [selectedModels valueForKeyPath:@"resourceUrl"];
         
-        if (self.imageUrls.count >= 4 || self.type ) {
+        if (self.type) {
+            SGImageAndVideoModel *model = selectedModels.firstObject;
+            [self.imageUrls replaceObjectAtIndex:0 withObject:model.fullPath];
+            self.batch.detail = model.ID;
+        }else{
+            [self.imageUrls insertObjects:resourceUrls atIndexes:indexSet];
+            
+            NSMutableString *imageID = [NSMutableString string];
+            for (SGImageAndVideoModel *model in selectedModels) {
+                [imageID appendFormat:@"%@,",model.ID];
+            }
+            self.batch.detail = imageID;
+        }
+        
+        if (self.imageUrls.count >= 4) {
             [self.imageUrls removeLastObject];
         }
         [collectionView reloadData];
     };
-    videoVC.type =self.type;
     
+    videoVC.type =self.type;
     
     [self.rootVC.navigationController pushViewController:videoVC animated:YES];
     
-//
-//
-//    FXZSBatchPictureItemCell *cell = (FXZSBatchPictureItemCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    UIImage *image =  cell.iconView.image;
-//    if ([UIImagePNGRepresentation(image) isEqualToData:UIImagePNGRepresentation(kAddImage)]) {
-//        TZImagePickerController *imagePicker = [[TZImagePickerController alloc]initWithMaxImagesCount:1 delegate:self];
-//        [kWindown.rootViewController presentViewController:imagePicker animated:YES completion:nil];
-//        self.selectedIndexPath = indexPath;
-//    }
+}
+
+-(void)addPicture{
+    TZImagePickerController *imagePickController = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    imagePickController.allowPickingVideo = NO;
     
+    [self.rootVC presentViewController:imagePickController animated:YES completion:nil];
 }
 
 #pragma mark -- TZImagePickerController代理方法
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos{
-    [self handelphotoData:photos infos:infos];
-}
-
-#pragma mark -- 处理选择后的照片数据
--(void)handelphotoData:(NSArray *)photos infos:(NSArray<NSDictionary *> *)infos{
-    UIImage *image = photos[0];
-    NSString *filePath = infos[0][@"PHImageFileURLKey"];
-    NSString *imageName = [filePath lastPathComponent];
+-(void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto{
     
-    [[NetWorkTools sharedNetWorkTools]downloadWithPath:@"" completionHandler:^(NSURL *filePath, NSError *error) {
-        NSLog(@"filePath",filePath.absoluteString);
-    }];
+    NSMutableArray *fileNames = [NSMutableArray array];
+    NSMutableArray *fileUrls = [NSMutableArray array];
+    dispatch_group_t group = dispatch_group_create();
     
+    [SVProgressHUD show];
+        NSData *data = UIImagePNGRepresentation(photos[0]);
+        NSString *fileName = [assets[0]valueForKeyPath:@"filename"];
+        [fileNames addObject:fileName];
+        dispatch_group_enter(group);
+        [[NetWorkTools sharedNetWorkTools]uploadFileWithPath:upload fileData:data fileName:fileName progress:^(NSProgress *progress) {
+            //NSLog(@"第%d张图片上传进度:%.2f",i+1,1.0 * progress.completedUnitCount / progress.totalUnitCount);
+        } success:^(NSString *filePath) {
+            NSLog(@"图片成功路径是filePath = %@",filePath);
+            [self.imageUrls replaceObjectAtIndex:0 withObject:filePath];
+            self.batch.detail = filePath;
+            [self.collectionView reloadData];
+            [SVProgressHUD dismiss];
+        } failure:^(NSError * _Nonnull error) {
+            NSLog(@"error = %@",error);
+            [SVProgressHUD dismiss];
+        }];
     
-//    [NetWorkManagerYJ uploadFileWith:getUpload parms:@{} image:image name:imageName completionHandle:^(id model, NSString *error) {
-//        NSArray *arr = model[@"data"][@"IMAGE_URLS"];
-//        if (arr.count) {
-//            NSString *imagePath = arr[0];
-//            self.activitiy.detail = [NSString stringWithFormat:@"%@%@",USER_IMAGE_IP,imagePath];
-//            if ([self.delegate respondsToSelector:@selector(sgFarmActivitiyPictureCellClick:)]) {
-//                [self.delegate sgFarmActivitiyPictureCellClick:self.selectedIndexPath];
-//            }
-//        }else{
-//            [MBProgressHUD showAlert:@"服务器返回图片地址错误"];
-//        }
-//    }];
 }
 
 -(void)setBatch:(ZSBatch *)batch{
@@ -123,13 +129,14 @@ static NSString *const FXZSBatchPictureItemCellID= @"FXZSBatchPictureItemCell";
     [self.topButton setTitle:batch.name forState:UIControlStateNormal];
     [self.topButton setImage:[UIImage imageNamed:batch.icon] forState:UIControlStateNormal];
     [self.imageUrls removeAllObjects];
-    if (self.type == 0) {
-        [self.imageUrls addObject:batch.detail];
+
+    NSArray *arr = [batch.detail componentsSeparatedByString:@","];
+    if (arr.count) {
+        [self.imageUrls addObjectsFromArray:arr];
     }else{
-        [self.imageUrls addObject:[UIImage imageNamed:@"AddMedia"]];
+        [self.imageUrls addObject:batch.detail];
     }
-  
-    
+    self.type = [batch.name containsString:@"图片"] ? FXZSBatchTypePicture : FXZSBatchTypeVideo;
     [self.collectionView reloadData];
 }
 
