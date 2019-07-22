@@ -1372,7 +1372,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Batch record printing/Batch record printing.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4V5KFRWL87;
+				DEVELOPMENT_TEAM = 8K8DRFQ8X2;
 				GCC_PREFIX_HEADER = "$SRCROOT/Batch record printing/PrefixHeader.pch";
 				INFOPLIST_FILE = "Batch record printing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1380,7 +1380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.csc.retrospect.cn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fxzw.BatchRecordPrinting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1395,7 +1395,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Batch record printing/Batch record printing.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4V5KFRWL87;
+				DEVELOPMENT_TEAM = 8K8DRFQ8X2;
 				GCC_PREFIX_HEADER = "$SRCROOT/Batch record printing/PrefixHeader.pch";
 				INFOPLIST_FILE = "Batch record printing/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1403,7 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.csc.retrospect.cn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fxzw.BatchRecordPrinting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

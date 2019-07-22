@@ -9,7 +9,7 @@
 #ifndef NetWorkUrl_h
 #define NetWorkUrl_h
 
-#define MaiURL  @"http://218.89.222.117:9007"  // 回家测试：
+#define MaiURL  @"http://www.zs.qsst.moa.gov.cn"  // 回家测试：
 
 //登陆
 #define  LoginUrl @"/sofn-tts-web-branch/ttsLogin/loginApp"

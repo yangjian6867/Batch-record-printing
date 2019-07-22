@@ -45,6 +45,9 @@
                         <constraint firstAttribute="height" constant="45" id="sUy-fW-iZv"/>
                     </constraints>
                     <state key="normal" title="确认"/>
+                    <connections>
+                        <action selector="suare:" destination="-1" eventType="touchUpInside" id="5TU-pZ-7R0"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JRp-P3-EgQ">
                     <rect key="frame" x="20" y="198" width="374" height="50"/>

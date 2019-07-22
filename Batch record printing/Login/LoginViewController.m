@@ -10,6 +10,7 @@
 #import "Account.h"
 #import "FXUserTool.h"
 #import "AddBatchViewController.h"
+#import "RegisterViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *AccountTF;
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"登录";
+    
 }
 
 - (IBAction)loginAction:(id)sender {
@@ -64,6 +66,8 @@
 }
 
 - (IBAction)registreAction:(id)sender {
+    RegisterViewController *regvc = [[RegisterViewController alloc]init];
+    [self.navigationController pushViewController:regvc animated:YES];
 }
 
 @end

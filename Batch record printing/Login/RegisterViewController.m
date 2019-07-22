@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title= @"注册";
 }
 
 /*
@@ -28,5 +29,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)suare:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
