@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "AddBatchViewController.h"
 #import "LoginViewController.h"
+#import "LeftSortsViewController.h"
+#import "HomeTableViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -22,24 +25,30 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    
+   
     
     [SVProgressHUD setMinimumDismissTimeInterval:0.1];
    
     
     if ([FXUserTool sharedFXUserTool].account) {
         
-        UITabBarController *tabrVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateInitialViewController];
-        
-        self.window.rootViewController = tabrVC;
+        [self changeRootVC];
     }else{
-        self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[[LoginViewController alloc]init]];;
+        self.window.rootViewController = [[MainNavigationController alloc]initWithRootViewController:[[LoginViewController alloc]init]];;
     }
     [self.window makeKeyAndVisible];
     
     return YES;
 }
 
+
+-(void)changeRootVC{
+    HomeTableViewController *mainVC = [[HomeTableViewController alloc] init];
+    self.mainNavigationController = [[MainNavigationController alloc] initWithRootViewController:mainVC];
+    LeftSortsViewController *leftVC = [[LeftSortsViewController alloc] init];
+    self.LeftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:self.mainNavigationController];
+    self.window.rootViewController = self.LeftSlideVC;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

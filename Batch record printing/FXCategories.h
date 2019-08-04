@@ -16,5 +16,6 @@
 #import "UIScreen+Addtion.h"
 #import "UIApplication+Addtion.h"
 #import "UINavigationController+Addtion.h"
+#import "UIBarButtonItem+Addition.h"
 #import "UIImage+Addition.h"
 #endif /* FXCategories_h */

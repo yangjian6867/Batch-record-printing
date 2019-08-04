@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "466E8527A7D31DD2F6786152F5340AB9"
+               BlueprintIdentifier = "EE98DB05BAA362E8D7BE47BD59C12240"
                BuildableName = "libPods-Batch record printing.a"
                BlueprintName = "Pods-Batch record printing"
                ReferencedContainer = "container:Pods.xcodeproj">

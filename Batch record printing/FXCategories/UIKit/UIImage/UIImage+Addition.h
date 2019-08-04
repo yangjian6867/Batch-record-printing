@@ -48,4 +48,6 @@
 // 获取视频第一帧
 + (UIImage *)firstFrameWithVideoURL:(NSURL *)url;
 
++(UIImage*) imageByCaptureScreen;
+
 @end

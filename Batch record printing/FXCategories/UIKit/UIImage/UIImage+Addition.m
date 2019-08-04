@@ -273,5 +273,50 @@
     //    return nil;
 }
 
++(UIImage*) imageByCaptureScreen  {
+    if(&UIGraphicsBeginImageContextWithOptions!=NULL){
+        //        UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size,NO,0);
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 50),NO,0);
+    }
+    else{
+        UIGraphicsBeginImageContext(CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - 50));
+    }
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    for(UIWindow*window in[[UIApplication sharedApplication]windows])
+    {
+        if(![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
+        {
+            CGContextSaveGState(context);
+            CGContextTranslateCTM(context, [window center].x, [window center].y);
+            CGContextConcatCTM(context, [window transform]);
+            //            if(IOS7_OR_LATER)
+            //            {
+            //                CGContextTranslateCTM(context,
+            //                                      -[window bounds].size.width* [[window layer]anchorPoint].x,
+            //                                      -[window bounds].size.height* [[window layer]anchorPoint].y);
+            //            }
+            //            else
+            //            {
+            CGContextTranslateCTM(context,
+                                  -[window bounds].size.width* [[window layer]anchorPoint].x,
+                                  -([window bounds].size.height)* [[window layer]anchorPoint].y-64);
+            //            }
+            [[window layer]renderInContext:context];
+            
+            CGContextRestoreGState(context);
+            
+        }
+        
+    }
+    
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+    
+}
+
+
 
 @end

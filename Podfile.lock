@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - CWLateralSlide (1.6.4)
   - IQKeyboardManager (6.3.0)
   - JCore (2.0.1)
   - JPush (3.2.0):
@@ -27,6 +28,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - CWLateralSlide
   - IQKeyboardManager
   - JPush
   - MJExtension
@@ -37,6 +39,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - CWLateralSlide
     - IQKeyboardManager
     - JCore
     - JPush
@@ -47,6 +50,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CWLateralSlide: b7933f4a03d652fbec6789bb45dc567011e892ca
   IQKeyboardManager: 2ca9d64893247556f53523dcd8d78641f0ba7c23
   JCore: 8425fb3f85f1400f9bc8ccf8121cd5694a790f3b
   JPush: 8459e7a709ad86f95884fcb49cbd57a6da24744e
@@ -55,6 +59,6 @@ SPEC CHECKSUMS:
   SDWebImage: c739016e4bdf0a4a1f9a04b5e0385395ad63a282
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: ac31d67c707d9bb5c6a0e613e41d92da204c85ef
+PODFILE CHECKSUM: fcf1241d675933697f36d4150472599ef9dd1e15
 
 COCOAPODS: 1.6.1

@@ -14,4 +14,5 @@ pod 'IQKeyboardManager'
 pod 'JPush'
 pod 'MJExtension'
 pod 'SVProgressHUD'
+pod 'CWLateralSlide'
 end

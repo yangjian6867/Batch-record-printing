@@ -32,19 +32,23 @@
 
 -(void)setPici:(FXPICI *)pici{
     
-    if ([pici.PRODUCT_INDUSTRY isEqualToString:@"01"]) {
-        // 种植业
-        self.iconView.image = [UIImage imageNamed:@"icon_zhongzhi"];
-        
-    }else if ([pici.PRODUCT_INDUSTRY isEqualToString:@"02"]) {
-        // 畜牧业
-        self.iconView.image = [UIImage imageNamed:@"icon_xumu"];
-    }else if ([pici.PRODUCT_INDUSTRY isEqualToString:@"03"]) {
-        // 水产品
-        self.iconView.image = [UIImage imageNamed:@"icon_shuichan"];
-    }
-    
     self.nameLabel.text = pici.PRODUCT_NAME;
+    NSString *iconName;
+    if ([pici.PRODUCT_NAME containsString:@"大米"]) {
+        iconName = @"dami";
+    }else if ([pici.PRODUCT_NAME containsString:@"早籼稻谷"]) {
+        iconName = @"zaoxiandaogu";
+    }else if ([pici.PRODUCT_NAME containsString:@"粳稻谷"]) {
+        iconName = @"nuodaogu";
+    }else if ([pici.PRODUCT_NAME containsString:@"籼糯稻谷"]) {
+        iconName = @"xiannuodaogu";
+    }else if ([pici.PRODUCT_NAME containsString:@"晚籼稻谷"]) {
+        iconName = @"wanxiandaogu";
+    }else{
+        iconName = @"dami";
+    }
+    self.iconView.image = [UIImage imageNamed:iconName];
+    
     self.zhuisumaLabel.text = [NSString stringWithFormat:@"追溯码:%@",pici.PRODUCT_PC];
     self.unitLabel.text = [NSString stringWithFormat:@"收获数量(%@)",pici.HARVEST_UNIT];
     self.numberLabel.text = pici.PRODUCT_AMOUNT;

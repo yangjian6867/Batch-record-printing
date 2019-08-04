@@ -1,23 +1,28 @@
-//
-//  HomeTableViewController.m
-//  Batch record printing
-//
-//  Created by SG on 2019/7/4.
-//  Copyright © 2019 杨健. All rights reserved.
-//
-
 #import "HomeTableViewController.h"
 #import "AddBatchViewController.h"
 #import "FXPICI.h"
-#import "FXHomeTableViewCell.h"
+#import "SGHomeCollectionCell.h"
 #import "HomeDetailViewController.h"
+#import "UIViewController+CWLateralSlide.h"
+#import "LeftViewController.h"
+#import "HomeHeaderReusableView.h"
+#import "AppDelegate.h"
 
-@interface HomeTableViewController ()
+@interface HomeTableViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic,strong)NSMutableArray *picis;
 @property (nonatomic,strong)NSMutableDictionary *requestDict;
+@property (nonatomic,strong) LeftViewController *leftVC; //
+@property (nonatomic,strong)UICollectionView *collectionView;
 @end
 
 @implementation HomeTableViewController
+
+- (LeftViewController *)leftVC {
+    if (_leftVC == nil) {
+        _leftVC = [LeftViewController new];
+    }
+    return _leftVC;
+}
 
 -(NSMutableDictionary *)requestDict{
     if (!_requestDict) {
@@ -28,18 +33,68 @@
     return _requestDict;
 }
 
-static NSString *const FXHomeTableViewCellID = @"FXHomeTableViewCell";
+static NSString *const FXHomeTableViewCellID = @"SGHomeCollectionCell";
+static NSString *const HomeHeaderReusableViewID = @"HomeHeaderReusableView";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"批次管理";
-    self.tableView.rowHeight = 80;
+    self.title = @"种植批次管理";
     
-    [self.tableView registerNib:[UINib nibWithNibName:FXHomeTableViewCellID bundle:nil] forCellReuseIdentifier:FXHomeTableViewCellID];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewItems)];
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreItems)];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout.itemSize = CGSizeMake((UIScreen.screen_width - 30 ) / 2, 140);
+    layout.minimumLineSpacing = 10;
+    layout.minimumInteritemSpacing = 10;
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout.headerReferenceSize = CGSizeMake(UIScreen.screen_width, 160);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.view addSubview:self.collectionView];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:FXHomeTableViewCellID bundle:nil] forCellWithReuseIdentifier:FXHomeTableViewCellID];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"HomeHeaderReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HomeHeaderReusableViewID];
+    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewItems)];
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreItems)];
     [self loadNewItems];
+    
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImagename:@"caidan" hightImagename:nil title:nil target:self action:@selector(openOrCloseLeftList)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImagename:@"tianjia" hightImagename:nil title:nil target:self action:@selector(addBatchAction)];
+    
+    // 注册手势驱动
+    __weak typeof(self)weakSelf = self;
+    [self cw_registerShowIntractiveWithEdgeGesture:YES transitionDirectionAutoBlock:^(CWDrawerTransitionDirection direction) {
+        if (direction == CWDrawerTransitionFromLeft) { // 左侧滑出
+            [weakSelf defaultAnimationFromLeft];
+        }
+    }];
+}
+// 仿QQ从左侧划出
+- (void)defaultAnimationFromLeft {
+    
+    // 强引用leftVC，不用每次创建新的,也可以每次在这里创建leftVC，抽屉收起的时候会释放掉
+    [self cw_showDefaultDrawerViewController:self.leftVC];
+    // 或者这样调用
+    //    [self cw_showDrawerViewController:vc animationType:CWDrawerAnimationTypeDefault configuration:nil];
+}
+
+- (void) openOrCloseLeftList
+{
+    AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (tempAppDelegate.LeftSlideVC.closed)
+    {
+        [tempAppDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [tempAppDelegate.LeftSlideVC closeLeftView];
+    }
 }
 
 -(void)loadNewItems{
@@ -61,67 +116,41 @@ static NSString *const FXHomeTableViewCellID = @"FXHomeTableViewCell";
             self.picis = [FXPICI mj_objectArrayWithKeyValuesArray:JSON[@"data"][@"list"]];
         }
         [self tableViewEndRefresh];
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
     } :^(NSError *error) {
         [self tableViewEndRefresh];
     }];
 }
 
 -(void)tableViewEndRefresh{
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
+    [self.collectionView.mj_header endRefreshing];
+    [self.collectionView.mj_footer endRefreshing];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.picis.count;
 }
 
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FXHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FXHomeTableViewCellID forIndexPath:indexPath];
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SGHomeCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:FXHomeTableViewCellID forIndexPath:indexPath];
     cell.pici = self.picis[indexPath.row];
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    FXPICI *pici = self.picis[indexPath.row];
-    
-    HomeDetailViewController *homeDetailVC = [[HomeDetailViewController alloc]init];
-    homeDetailVC.productID = pici.ID;
-    [self.navigationController pushViewController:homeDetailVC animated:YES];
-}
-
-
-
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
-}
-
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle ==UITableViewCellEditingStyleDelete) {
-        
-        //[self.listArrayremoveObjectAtIndex:indexPath.row];//删除数据源当前行数据
-        //[tableView deleteRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    if (kind == UICollectionElementKindSectionHeader) {
+        UICollectionReusableView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HomeHeaderReusableViewID forIndexPath:indexPath];
+        return headerView;
+    }else{
+        return [[UICollectionReusableView alloc]init];
     }
 }
 
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return @"删除";
-}
-
--(UISwipeActionsConfiguration*)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)){
-    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-        [self delUserProduct:indexPath];
-    }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    UISwipeActionsConfiguration *actions = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
-    actions.performsFirstActionWithFullSwipe = NO;
-    return actions;
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    FXPICI *pici = self.picis[indexPath.row];
+    HomeDetailViewController *homeDetailVC = [[HomeDetailViewController alloc]init];
+    homeDetailVC.productID = pici.ID;
+    [self.navigationController pushViewController:homeDetailVC animated:YES];
 }
 
 
@@ -131,7 +160,7 @@ static NSString *const FXHomeTableViewCellID = @"FXHomeTableViewCell";
     [[NetWorkTools sharedNetWorkTools]requestWithType:RequesTypePOST urlString:deleteTtsScltxxcjScgl parms:@{@"id":[FXUserTool sharedFXUserTool].account.userId} success:^(id JSON) {
         [SVProgressHUD showSuccessWithStatus:@"删除成功"];
         [self.picis removeObjectAtIndex:indexPath.row];
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
     } :^(NSError *error) {
         
     }];
@@ -139,7 +168,7 @@ static NSString *const FXHomeTableViewCellID = @"FXHomeTableViewCell";
 }
 
 
-- (IBAction)addBatchAction:(id)sender {
+- (void)addBatchAction{
     
     AddBatchViewController *addVc = [[AddBatchViewController alloc]init];
     addVc.refreshDataBlock = ^{

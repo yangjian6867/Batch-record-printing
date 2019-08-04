@@ -2,7 +2,7 @@
 //  HomeTableViewController.h
 //  Batch record printing
 //
-//  Created by SG on 2019/7/4.
+//  Created by 杨健 on 2019/7/26.
 //  Copyright © 2019 杨健. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeTableViewController : UITableViewController
+@interface HomeTableViewController : UIViewController
 
 @end
 

@@ -11,11 +11,19 @@
 #import "FXUserTool.h"
 #import "AddBatchViewController.h"
 #import "RegisterViewController.h"
+#import "HomeTableViewController.h"
+#import "MainNavigationController.h"
+#import "LeftSortsViewController.h"
+#import "MainNavigationController.h"
+#import "LeftSlideViewController.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *AccountTF;
 @property (nonatomic,copy)NSString *UUID;
 @property (nonatomic,copy)NSString *code;
+@property (strong, nonatomic) LeftSlideViewController *LeftSlideVC;
+@property (strong, nonatomic) MainNavigationController *mainNavigationController;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 
 @end
@@ -26,10 +34,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"登录";
-    
+    //self.AccountTF.text = @"test053_003";
+    //self.passwordTF.text = @"12345678";
+    //self.AccountTF.text = @"nmg1";
+    //self.passwordTF.text = @"Abc123456";
 }
 
 - (IBAction)loginAction:(id)sender {
+    
+    if (self.AccountTF.text.length <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入账号"];
+        return;
+    }else if (self.passwordTF.text.length <=0){
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        return;
+    }
+    
     [self getUUIDs];
 }
 
@@ -57,9 +77,11 @@
         Account *account = [Account mj_objectWithKeyValues:JSON[@"data"]];
         account.token = JSON[@"token"];
         [[FXUserTool sharedFXUserTool]saveAccount:account];
-        UITabBarController *tabrVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateInitialViewController];
+       
         
-        [UIApplication sharedApplication].keyWindow.rootViewController = tabrVC;
+         AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [tempAppDelegate changeRootVC];
+        
     } :^(NSError *error) {
         
     }];

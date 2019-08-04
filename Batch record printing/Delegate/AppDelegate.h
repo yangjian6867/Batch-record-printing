@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MainNavigationController.h"
+#import "LeftSlideViewController.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-
+-(void)changeRootVC;
+@property (strong, nonatomic) LeftSlideViewController *LeftSlideVC;
+@property (strong, nonatomic) MainNavigationController *mainNavigationController;
 @end
 
